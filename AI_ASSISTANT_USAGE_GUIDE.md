@@ -1,0 +1,115 @@
+# Working with an AI coding assistant — setup, usage, and safe limits
+
+**Purpose:** this file is the practical companion to the rest of the kit. The other files govern *what* you build; this one covers *how you drive the tool itself* — installing Claude Code or Codex CLI, which mode to run it in, how to keep token/cost usage down, what good day-to-day use looks like, and — most importantly — what it must never be given access to. Read this once before your first real project, and point new hires at it directly.
+
+This file describes two tools by name — **Claude Code** (Anthropic) and **Codex CLI** (OpenAI) — because those are the two the team is standardizing on. The advice generalizes to any similar agentic coding assistant; if the team adopts another one later, re-check its own docs against the same headings below.
+
+---
+
+## 1. Installing the tools
+
+### Claude Code
+
+| Platform | Command |
+|---|---|
+| macOS / Linux / WSL | `curl -fsSL https://claude.ai/install.sh \| bash` |
+| Windows (PowerShell) | `irm https://claude.ai/install.ps1 \| iex` |
+| macOS (Homebrew) | `brew install --cask claude-code` |
+| Windows (WinGet) | `winget install Anthropic.ClaudeCode` |
+
+Confirm with `claude --version`, then run `claude` inside a project folder and log in when prompted (a Claude Pro/Max/Team/Enterprise account, or a Console/API key). On native Windows, install [Git for Windows](https://git-scm.com/downloads/win) first so Claude Code has a real Bash tool to work with — without it, Claude Code falls back to PowerShell only.
+
+### Codex CLI
+
+```bash
+npm install -g @openai/codex
+```
+
+Confirm with `codex --version`, then run `codex` inside a project folder and sign in with your ChatGPT or API account.
+
+### Either tool — first thing to do in a new project
+
+Run the init command (`/init` in both tools) to generate a starter `CLAUDE.md` (Claude Code) or `AGENTS.md` (Codex CLI) — the memory file the assistant reads at the start of every session. Put this kit's relevant starter file (`PROJECT_STARTER_T*.md`) and, for anything Tier 2+, `AI_PROJECT_STRUCTURE.md` on the assistant's reading list from day one — either by referencing them in that memory file, or by handing them over at the start of the session as `AI_INTAKE_ASSESSMENT.md` already instructs. Keep that memory file under ~200 lines: it loads into every session whether needed or not, and a bloated one is the single biggest avoidable source of wasted tokens (see Section 3).
+
+---
+
+## 2. Picking a mode — how much you supervise
+
+Both tools offer a spectrum from "ask me before everything" to "run unattended." The right point on that spectrum depends on the project's **tier** from `AI_PROJECT_GUIDELINES.md` — not on how much of a hurry you're in.
+
+| Mode | Claude Code | Codex CLI | Use it when |
+|---|---|---|---|
+| Full manual review | Manual mode (`claude --permission-mode default`) | `--ask-for-approval on-request` (the default) | Tier 2–3 work, unfamiliar code, anything touching real data |
+| Explore/plan without changing anything | Plan mode (`--permission-mode plan`, or `Shift+Tab`) | `/plan` | The start of any non-trivial task, regardless of tier — see what the assistant intends before it touches a single file |
+| Fewer prompts, still supervised | Manual mode + sandbox auto-allow (`/sandbox`) | `--sandbox workspace-write` | Tier 0–1 iteration on your own machine |
+| Hands-off | Auto mode (classifier reviews instead of you) | `--ask-for-approval never` (still sandboxed) | Low-stakes, well-scoped Tier 0–1 tasks only |
+| Fully unattended | `--dangerously-skip-permissions` | `--dangerously-bypass-approvals-and-sandbox` | **Inside a container/VM only** — see Section 4. Never on a laptop with real credentials or customer data reachable |
+
+**Default recommendation for this kit:** start every session in plan mode so the assistant states its approach before changing anything, then drop into manual or sandboxed-auto for the actual implementation. Reserve hands-off/unattended modes for Tier 0 personal scripts or for CI jobs that already run inside an isolated, disposable environment (Section 4).
+
+---
+
+## 3. Using less — the practical cost/token guide
+
+Token usage (and therefore cost) scales almost entirely with **how much context the assistant is carrying**, not with how hard the task is. In order of impact:
+
+1. **Clear between unrelated tasks.** `/clear` (Claude Code) starts a fresh session for free; a long-running session re-sends its whole history on every turn, including turns that have nothing to do with what you're asking now. Rename (`/rename`) before clearing if you'll want to find the session again.
+2. **Match the model to the task.** Use the lighter/default model (e.g. Sonnet) for ordinary coding; reserve the heaviest reasoning model for genuinely hard architectural decisions. Both tools let you switch per-session (`/model` in Claude Code; the reasoning-effort flag in Codex CLI).
+3. **Keep the memory file short.** Move detailed, occasional-use instructions (a migration runbook, a release checklist) into a skill or a separate doc that's loaded on demand, not into `CLAUDE.md`/`AGENTS.md`, which loads on every single session whether you need it that turn or not.
+4. **Prefer CLI tools over chatty integrations.** `gh`, `aws`, `gcloud` and similar CLIs are more context-efficient than an equivalent MCP integration, and disable any MCP server you're not actively using in a given project (`/mcp`).
+5. **Delegate noisy output.** Test runs, log files, and long fetches burn context fast. Let a subagent or a hook filter that output down to just the failures/errors before it reaches the main conversation instead of dumping the whole thing in.
+6. **Write specific prompts.** "Add input validation to the login handler in `auth.ts`" costs far less than "improve this codebase," which triggers broad, expensive exploration.
+7. **Use plan mode on anything non-trivial, not just for safety.** Catching a wrong approach before code is written is cheaper than re-work after.
+
+If the organization is running several seats, set per-user or per-team spend limits and check the usage dashboard periodically (both vendors provide one) rather than discovering a cost problem a month later.
+
+---
+
+## 4. What never gets access — no exceptions
+
+This section is not optional guidance; treat every line as a hard rule, and treat a violation the same way you'd treat a real security incident, because functionally it is one.
+
+- **No production credentials, ever, in any form the assistant can read** — not in an env var it can `cat`, not pasted into a prompt "just this once," not in a config file it has read access to. If a task genuinely requires a production secret, a human runs that one step manually; the assistant does not see the value.
+- **No direct network reach to production servers, internal admin panels, or customer-data systems.** Point the assistant at a local dev/staging environment or a sandboxed copy of the data. If the task is "fix something in production," a human executes the fix the assistant proposes — the assistant does not get a live connection to do it itself.
+- **No unattended/bypass mode (`--dangerously-skip-permissions`, `--dangerously-bypass-approvals-and-sandbox`) outside a disposable container or VM.** These modes remove the safety net entirely; the only acceptable place to remove a safety net is somewhere a mistake can't reach anything that matters — a throwaway container, not a laptop that also has your SSH keys, cloud CLI sessions, and password manager unlocked.
+- **No real customer, financial, or health data as working material**, even for a "quick test" — use synthetic or anonymized data. This is the same rule as `AI_PROJECT_GUIDELINES.md`'s data-classification requirement; an AI assistant session is not an exception to it.
+- **No auto-approval of destructive or irreversible actions** — force-pushes, dropping/altering production schemas, deleting resources the assistant didn't create in the session, disabling a test or security check to make it pass. Both tools already block several of these by default in their safer modes; don't override that with a broad allow rule to save a few prompts.
+- **No repointing of remotes, API base URLs, or webhook endpoints** to a host you didn't name — a classic sign of the assistant following an injected instruction from something it read (a webpage, an issue, a file) rather than from you.
+- **No browser automation that can carry your cookies/session/credentials off-site**, unless you're watching it do it.
+
+If a task seems to require breaking one of these rules, that's a sign the task needs a human to do that specific step, not a sign to loosen the rule.
+
+## 5. Recommended configuration
+
+A reasonable default `settings.json` (Claude Code) or `config.toml` (Codex CLI) for a Tier 1–2 project on this kit:
+
+- **Starting mode:** manual or plan for anyone unfamiliar with the codebase; sandboxed auto-allow for day-to-day iteration by an owner who already knows it.
+- **Deny rules for anything secret**, regardless of mode:
+  ```json
+  {
+    "permissions": {
+      "deny": ["Read(.env)", "Read(**/secrets/**)", "Read(**/*.pem)", "Read(**/*credentials*)"]
+    }
+  }
+  ```
+- **Network restricted to what the task needs** — Codex CLI: `network_access = false` under `[sandbox_workspace_write]`, enabled per-domain only when required; Claude Code: deny raw `curl`/`wget` via Bash and use `WebFetch(domain:…)` allow rules instead for the domains actually needed.
+- **Ask (not allow) rules for anything that pushes, deploys, or deletes** — e.g. `Bash(git push *)`, `Bash(terraform apply *)` — so these always get a human look regardless of what mode the session is in.
+- **Checked into version control** where the tool supports it (Claude Code project settings), so the whole team gets the same floor and can review changes to it like any other config.
+- **Tier 3 projects:** never run above manual/plan mode, and never inside a shared or long-lived environment — an ephemeral, single-purpose container per session, torn down afterward, in line with `AI_PROJECT_STRUCTURE.md`'s security requirements.
+
+## 6. Good day-to-day habits
+
+- Let the assistant explore and explain before it changes anything on a codebase you don't know yet ("what does this do", "where's the entry point") — both tools read your files as needed without you manually attaching them.
+- Break multi-step work into an explicit numbered plan rather than one big vague ask.
+- Give it something to verify against — a failing test, an expected output, a screenshot — so it can check its own work instead of you finding the mistake later.
+- Test/commit incrementally rather than accepting one huge diff at the end.
+- Course-correct immediately (stop/rewind) the moment it heads the wrong way, rather than letting it continue and cleaning up after.
+- Review AI-authored changes the same way you'd review a colleague's pull request — this kit's per-tier requirements (a second reviewer at T2+, a documented fallback at T3) apply exactly the same whether the diff was written by a person or an assistant.
+
+---
+
+## Where this fits in the kit
+
+This file doesn't change any tier or requirement — it's how you operate the tool while meeting the requirements the rest of the kit already sets. Section 4 above is itself one concrete way the Security & data handling rules in `AI_PROJECT_GUIDELINES.md` §4 and `AI_PROJECT_STRUCTURE.md` §3 get applied at the tool level, and belongs in any Tier 3 security review as evidence of how developer tooling is configured, not just how the application itself is.
+
+Sources consulted for this file (check them directly if something here seems to have changed — both vendors update fast): [Claude Code quickstart](https://code.claude.com/docs/en/quickstart), [permission modes](https://code.claude.com/docs/en/permission-modes), [permissions reference](https://code.claude.com/docs/en/permissions), [managing costs](https://code.claude.com/docs/en/costs), [Codex agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security), [Codex best practices](https://learn.chatgpt.com/guides/best-practices).

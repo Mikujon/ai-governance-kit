@@ -25,6 +25,7 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 | `reference/AI_Development_Standard.docx` | Policy completa e checklist di audit a 42 punti (Tier 3). |
 | `reference/Guida_Uso_Kit_Governance_AI.docx` | Guida utente passo-passo. |
 | `PILLARS_COVERAGE.md` | Mappa dei 7 requisiti fondativi → dove ciascuno è definito, applicato e tracciato. |
+| `AI_ASSISTANT_USAGE_GUIDE.md` | Come usare Claude Code / Codex CLI: installazione, modalità, come contenere i costi in token, e cosa non deve mai poter toccare. |
 
 ## Clonare da un'AI o da CI (nessuna copia locale necessaria)
 

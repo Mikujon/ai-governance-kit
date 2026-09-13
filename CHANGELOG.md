@@ -2,6 +2,13 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.2.0] — 2026-09-13
+
+### Aggiunto
+- `AI_ASSISTANT_USAGE_GUIDE.md` — guida pratica per l'uso quotidiano di Claude Code / Codex CLI: installazione (entrambe le piattaforme), scelta della modalità di autonomia in base al tier del progetto, tecniche verificate per ridurre il consumo di token/costi, configurazione consigliata (`settings.json` / `config.toml`), e una sezione non negoziabile su cosa l'assistente non deve mai poter toccare (credenziali di produzione, server/dati sensibili, modalità unattended fuori da un container, azioni distruttive automatiche). Contenuto verificato contro la documentazione ufficiale di entrambi i fornitori al momento della stesura.
+- Collegato da `00_START_HERE.md`, `README.md` e richiamato in `AI_INTAKE_ASSESSMENT.md` come lettura preliminare a qualunque tier.
+- Aggiunto ai file richiesti in `.github/workflows/validate-kit.yml`.
+
 ## [1.1.1] — 2026-09-13
 
 ### Corretto
