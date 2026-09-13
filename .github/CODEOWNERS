@@ -1,4 +1,2 @@
-# Ogni file del kit richiede la revisione del Governance Administrator prima del merge.
-# Sostituisci il team/utente qui sotto con quello reale non appena il repository è creato
-# (Settings → deve esistere come team dell'organization wearefiber, oppure usa uno username @).
-* @wearefiber/governance-admins
+﻿# Ogni file del kit richiede la revisione del Governance Administrator prima del merge.
+* jetmir.gjeloshi@wearefiber.com
