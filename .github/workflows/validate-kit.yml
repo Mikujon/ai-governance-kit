@@ -1,0 +1,50 @@
+name: Valida integrità del kit
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check-required-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verifica che tutti i file richiesti esistano
+        run: |
+          required=(
+            "00_START_HERE.md"
+            "AI_INTAKE_ASSESSMENT.md"
+            "PROJECT_STARTER_T0_PERSONAL.md"
+            "PROJECT_STARTER_T1_BASIC.md"
+            "PROJECT_STARTER_T2_STANDARD.md"
+            "PROJECT_STARTER_T3_CRITICAL.md"
+            "AI_PROJECT_GUIDELINES.md"
+            "AI_PROJECT_STRUCTURE.md"
+            "reference/AI_Development_Standard.docx"
+            "reference/Guida_Uso_Kit_Governance_AI.docx"
+            "CHANGELOG.md"
+            "CONTRIBUTING.md"
+            "README.md"
+          )
+          missing=0
+          for f in "${required[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "::error::File richiesto mancante: $f"
+              missing=1
+            fi
+          done
+          exit $missing
+
+      - name: Verifica che ogni starter citi il file guidelines/structure
+        run: |
+          for f in PROJECT_STARTER_T0_PERSONAL.md PROJECT_STARTER_T1_BASIC.md PROJECT_STARTER_T2_STANDARD.md PROJECT_STARTER_T3_CRITICAL.md; do
+            if ! grep -q "AI_PROJECT" "$f" 2>/dev/null && [ "$f" != "PROJECT_STARTER_T0_PERSONAL.md" ]; then
+              echo "::warning::$f non referenzia AI_PROJECT_GUIDELINES.md o AI_PROJECT_STRUCTURE.md — verifica che sia intenzionale."
+            fi
+          done
+
+      - name: Ricorda di taggare le versioni (solo informativo)
+        run: |
+          echo "Promemoria: se questa PR introduce un cambio sostanziale, taggare una nuova versione al merge (vedi CONTRIBUTING.md)."

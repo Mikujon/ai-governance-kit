@@ -1,0 +1,11 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/
+
+# Scratch conversions (if anyone renders the docx locally for review)
+*.pdf
+page-*.jpg
+guide-page-*.jpg
