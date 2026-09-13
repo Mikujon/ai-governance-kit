@@ -2,11 +2,19 @@
 
 **When to use this file:** the moment someone tells you they want to build a new AI tool or automation — before you scaffold anything, choose a stack, or pick a starter kit. Don't hand the user a table and ask them to self-classify: run this interview yourself, decide the tier, and tell them what you concluded and why.
 
+<<<<<<< HEAD
 This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.0.0 https://github.com/Mikujon/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
+=======
+This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. See `PILLARS_COVERAGE.md` if you need to justify to the user *why* a question matters — it maps every question back to the founding requirement behind it. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.0.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
+>>>>>>> 050725bfa9d68bcc75dfdcedc2e53f5457d87415
 
 ---
 
 ## 1. How to run the assessment
+
+### Before you start — don't let small things slip through
+
+Your job in this interview is to actively find the tier that best fits the project, not to passively accept the first answer. Treat "it's just a script," "it's just a spreadsheet," or "it's just a quick automation" as a prompt to ask *more* carefully, not a reason to skip the interview — these are exactly the phrases people use to describe things that turn out to be Tier 1 or Tier 2 once you ask who else uses it and what data it touches. Common disguises worth naming out loud if the user hasn't mentioned them: a Google Sheets or Excel/Apps Script/VBA macro, a Power Automate / Zapier / Make flow, an RPA bot, a scheduled script that emails or posts a report, or a personal ChatGPT/Claude prompt wired into some other tool. None of these get a pass just because they involve no "real" codebase — run the same ten questions.
 
 1. Explain briefly why you're asking: a few questions decide how much process this project needs, so a quick internal script isn't held to the same bar as something touching customer data.
 2. Ask the questions in Section 2 in your own words, in whatever order fits the conversation — group related ones together naturally rather than reading them as a checklist. Use multiple-choice where your tools support it; plain conversation otherwise.
@@ -53,7 +61,12 @@ Before scaffolding anything, create or append this block to the project's `PROJE
 ## Project Classification
 - Date: <today's date>
 - Assessed by: AI-assisted intake (assistant name), confirmed by <user name>
+<<<<<<< HEAD
 - Kit version used: <git tag, e.g. v1.0.0 — from Mikujon/ai-governance-kit>
+=======
+- Kit version used: <git tag, e.g. v1.0.0 — from wearefiber/ai-governance-kit>
+- Owner: <name — the person accountable for this tool, from Q1/ownership discussion; write it down here even if it's the same person running the interview>
+>>>>>>> 050725bfa9d68bcc75dfdcedc2e53f5457d87415
 - Resulting tier: T<0–3>
 - Key answers:
   - Reach / persistence / external calls: <summary>

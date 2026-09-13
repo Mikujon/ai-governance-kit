@@ -2,6 +2,24 @@
 
 This is the index for the AI project-governance document set, maintained at `Mikujon/ai-governance-kit`.
 
+## Why this exists
+
+Every internally-built AI tool or automation is a small liability if nobody but its author understands it: when that person changes teams or leaves, the tool either breaks silently, keeps running with nobody watching its security or its cost, or gets rebuilt from scratch by someone else who didn't know it already existed. This kit exists so that never has to happen — every tool gets a named owner, a written scope, a security check sized to its actual risk, and a place other people can find it — scaled so a five-minute script isn't held to the same bar as something touching customer data. `PILLARS_COVERAGE.md` shows exactly how each of the seven founding requirements behind this kit is met, file by file.
+
+## This covers more than "AI projects"
+
+If it automates something, remembers something between runs, or was built with AI assistance at all, it's in scope — regardless of language or platform. Don't let the word "AI" in the kit's name narrow it in your head. Concretely, all of the following go through the same `00_START_HERE.md` → starter flow, just at whatever tier they actually land on:
+
+| It looks like… | It's actually | Likely tier |
+|---|---|---|
+| A Google Apps Script or Sheets macro that reformats a report you run yourself now and then | A personal script | T0 |
+| A Sheets/Apps Script automation that emails a report to your team on a schedule | Basic internal tool (persists nothing shared, but runs unattended and others rely on it) | T1–T2 |
+| A Power Automate / Zapier / Make flow that moves data between two systems | Data architecture & integration in scope, even with zero code written | T2 |
+| An RPA bot or scheduled Python script that reads from one team's system and writes to another's | Shared data + operational reliance | T2 |
+| Any of the above if it touches customer, personal, financial or health data, or acts (sends, pays, deletes) without a human checking first | Regulated/autonomous | T3 |
+
+If you're building something and thinking "this is just a script, it doesn't need any of this" — that's exactly the sentence this kit is designed to catch. Run the classification in `AI_INTAKE_ASSESSMENT.md` or the table below anyway; it takes a minute, and Tier 0 is a perfectly valid, low-friction answer if that's genuinely where it lands.
+
 ## Getting the kit — no local copy required
 
 If your AI assistant has git or network access, don't attach these files by hand — have it read them directly from the repository at a pinned version:
@@ -77,3 +95,4 @@ When it's time to check a project is compliant, open its starter file (and, for 
 | `AI_PROJECT_STRUCTURE.md` | The full technical standard behind these starters — stack, ReBAC, data, design, CI/CD (reference only). |
 | `reference/AI_Development_Standard.docx` | The complete governance policy and 42-point audit checklist for Tier 3. |
 | `reference/Guida_Uso_Kit_Governance_AI.docx` | Step-by-step user guide (Italian) for people using the kit day to day. |
+| `PILLARS_COVERAGE.md` | Maps each of the 7 founding requirements to exactly where it's defined, enforced, and tracked. Read this first if you're being asked "does this kit actually cover X?" |
