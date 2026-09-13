@@ -1,19 +1,19 @@
 # Start here — pick the right project starter
 
-This is the index for the AI project-governance document set, maintained at `wearefiber/ai-governance-kit`.
+This is the index for the AI project-governance document set, maintained at `Mikujon/ai-governance-kit`.
 
 ## Getting the kit — no local copy required
 
 If your AI assistant has git or network access, don't attach these files by hand — have it read them directly from the repository at a pinned version:
 
 ```bash
-git clone --branch v1.0.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.0.0 https://github.com/Mikujon/ai-governance-kit.git
 ```
 
 Or fetch a single file without cloning (useful inside a prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.0.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/Mikujon/ai-governance-kit/v1.0.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 Always reference a version tag (`v1.0.0`), not `main` — record that tag in the project's `PROJECT.md` (Section 4 of `AI_INTAKE_ASSESSMENT.md`) so an audit later knows exactly which rules were in force when the project was built, even if the kit has changed since. See `CHANGELOG.md` in the repository for what changed between versions.

@@ -28,13 +28,13 @@ Il modello unico per costruire, classificare e certificare ogni strumento AI svi
 Se il tuo assistente AI ha accesso a git, non serve allegargli i file: fagli clonare direttamente questo repository prima di iniziare l'intervista.
 
 ```bash
-git clone --branch v1.0.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.0.0 https://github.com/Mikujon/ai-governance-kit.git
 ```
 
 Oppure, per leggere un solo file senza clonare (es. dentro un prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.0.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/Mikujon/ai-governance-kit/v1.0.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 ## Versioning
