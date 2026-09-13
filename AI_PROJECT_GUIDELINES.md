@@ -35,10 +35,10 @@ No "yes" anywhere → **Tier 0**.
 
 | Tier | Name | Typical example | Governance weight |
 |---|---|---|---|
-| **0** | Personal / throwaway | A one-off script to reformat a file, a quick chart for a meeting, a personal prompt template | Almost none — use good judgment, nothing to register |
-| **1** | Basic internal tool | A small script a team runs weekly, a personal report generator others start using | Light — named owner, basic security hygiene, no formal Hub record required but recommended |
-| **2** | Standard business tool | A departmental automation, a tool that reads/writes a shared database, an internal chatbot | Full seven-pillar Hub record, without the heaviest security testing |
-| **3** | Critical / regulated | Anything touching customer or personal data, anything acting autonomously, anything customer-facing | Full seven-pillar Hub record **and** the complete technical requirements in the AI Development Standard, including penetration testing and quarterly review |
+| **0** | Personal / throwaway | A one-off script to reformat a file, a quick chart for a meeting, a personal prompt template, a Sheets formula or Apps Script macro you run yourself now and then | Almost none — use good judgment, nothing to register |
+| **1** | Basic internal tool | A small script a team runs weekly, a personal report generator others start using, a Sheets/Apps Script automation that emails a scheduled report, a personal Zapier/Make flow | Light — named owner, basic security hygiene, no formal Hub record required but recommended |
+| **2** | Standard business tool | A departmental automation, a tool that reads/writes a shared database, an internal chatbot, an RPA bot or a Power Automate/Zapier/Make flow moving data between two systems | Full seven-pillar Hub record, without the heaviest security testing |
+| **3** | Critical / regulated | Anything touching customer or personal data, anything acting autonomously, anything customer-facing — no-code and low-code automations included; the platform doesn't change the tier | Full seven-pillar Hub record **and** the complete technical requirements in the AI Development Standard, including penetration testing and quarterly review |
 
 Tier 3 projects must also follow the full **AI Development Standard** document (the technical bible with the 42-point audit checklist) — this file gives the scaled-down version for Tiers 0–2, and points Tier 3 to that fuller standard rather than duplicating it.
 
@@ -135,3 +135,5 @@ Use the same pass/fail structure as the AI Development Standard's checklist (Sec
 ## 6. If the tier is unclear
 
 When a project sits on the edge (for example, a "basic report" that quietly reads customer data, or a personal script three other people now depend on), classify up, not down, and say so to the user — it's cheaper to lightly over-document a Tier 1 tool than to discover a Tier 3 gap after something goes wrong.
+
+This applies identically to anything built with no-code/low-code tools — a Sheets/Apps Script macro, a Power Automate/Zapier/Make flow, an RPA bot. The classification questions in Section 1 don't mention a programming language on purpose: what matters is who relies on it, what it touches, and what it can do on its own, never what it was built with.

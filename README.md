@@ -1,6 +1,8 @@
 # AI Project Governance Kit
 
-Il modello unico per costruire, classificare e certificare ogni strumento AI sviluppato internamente — dimensionato in base al rischio reale del progetto, non uguale per tutti.
+Il modello unico per costruire, classificare e certificare ogni strumento AI sviluppato internamente — dimensionato in base al rischio reale del progetto, non uguale per tutti. Copre anche automazioni "senza codice" (Sheets/Apps Script, Power Automate, Zapier/Make, bot RPA): il tier dipende da chi lo usa e cosa tocca, non dal linguaggio con cui è stato costruito — vedi `00_START_HERE.md`.
+
+Perché esiste: senza un modello comune, ogni script o automazione interna rischia di diventare un punto cieco quando chi l'ha creato cambia ruolo o lascia l'azienda — nessun owner, nessuna verifica di sicurezza, nessuna visibilità sui costi/risparmi. Questo kit risolve i 7 requisiti fondativi elencati in `PILLARS_COVERAGE.md`, in modo proporzionato alla dimensione reale del progetto.
 
 ## Come si usa
 
@@ -22,6 +24,7 @@ Il modello unico per costruire, classificare e certificare ogni strumento AI svi
 | `AI_PROJECT_STRUCTURE.md` | Standard tecnico: stack, ReBAC, dati, design, CI/CD. |
 | `reference/AI_Development_Standard.docx` | Policy completa e checklist di audit a 42 punti (Tier 3). |
 | `reference/Guida_Uso_Kit_Governance_AI.docx` | Guida utente passo-passo. |
+| `PILLARS_COVERAGE.md` | Mappa dei 7 requisiti fondativi → dove ciascuno è definito, applicato e tracciato. |
 
 ## Clonare da un'AI o da CI (nessuna copia locale necessaria)
 
