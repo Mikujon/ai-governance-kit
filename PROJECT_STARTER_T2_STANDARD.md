@@ -17,7 +17,16 @@
 >
 > **Success metric:** ______________________________________________
 >
-> **Business owner:** ________________  **Technical owner:** ________________
+> **Owner of record:** Governance Administrator — see `GOVERNANCE.md` (automatic from Tier 1 up, not chosen per project)
+> **Business contact:** ________________  **Technical contact:** ________________  **Infrastructure contact:** ________________
+
+> **Business case**
+> - Why now: ______________________________________________
+> - Expected benefit (quantify if possible): ______________________________________________
+> - Effort estimate (size or days/weeks, and who's building it): ______________________________________________
+> - One-time cost: ______________________________________________
+> - Monthly recurring cost: ______________________________________________
+> - Cost/benefit call: ______________________________________________
 
 ## 2. Structure
 
@@ -25,6 +34,7 @@
 project-root/
 ├── README.md
 ├── PROJECT.md              # Section 1 above
+├── OWNERSHIP_TRANSFER.md    # from OWNERSHIP_TRANSFER_TEMPLATE.md — kept current, not filled once
 ├── .env.example
 ├── docker-compose.yml
 ├── src/
@@ -63,9 +73,16 @@ project-root/
 ## 4. Requirements
 
 **Ownership**
-- [ ] Business owner and technical owner both named (Section 1).
-- [ ] A RACI matrix is completed for the project (recommended at this tier, required at Tier 3).
-- [ ] Ownership transfers within 5 business days of a role change or departure.
+- [ ] Owner of record shows the Governance Administrator (Section 1) — never an individual employee's name.
+- [ ] Business, technical, and infrastructure contacts all named (Section 1).
+- [ ] A RACI matrix is completed for the project (recommended at this tier, required at Tier 3) — the "Accountable" column is normally the Governance Administrator by design; contacts are typically "Responsible" or "Consulted".
+- [ ] Contacts hand off within 5 business days of a role change or departure — the Owner of record doesn't change, so this is a handoff to log, not an ownership gap to fill.
+- [ ] `OWNERSHIP_TRANSFER.md` created from `OWNERSHIP_TRANSFER_TEMPLATE.md` and kept current — reviewed at the same cadence as the 12-month check below, not only when someone actually leaves.
+
+**Business case**
+- [ ] Full business case completed in Section 1 (why / benefit / effort / cost).
+- [ ] Business case presented for go-live sign-off (recommended at this tier — see `AI_INTAKE_ASSESSMENT.md` Section 4).
+- [ ] Monthly recurring cost re-checked if usage or pricing changes materially after go-live.
 
 **Security**
 - [ ] No secret hardcoded — vault-backed in every shared/deployed environment.
@@ -103,7 +120,7 @@ project-root/
 - [ ] Manual fallback procedure documented in `docs/architecture.md`.
 
 **Governance visibility**
-- [ ] Registered in the AI Tools Governance Hub with owner, scope, and data notes.
+- [ ] Registered in the AI Tools Governance Hub with Owner of record, contacts, scope, and data notes.
 - [ ] Registered in the RPA / utility hub with usage/savings tracking.
 - [ ] Automatic review reminder set for 12 months (cyber + utility check).
 
@@ -111,30 +128,33 @@ project-root/
 
 | # | Requirement | Status (Pass/Fail/N-A) | Evidence |
 |---|---|---|---|
-| 1 | Business & technical owner named | | |
+| 1 | Owner of record = Governance Administrator; business/technical/infra contacts named | | |
 | 2 | RACI completed | | |
-| 3 | Ownership-transfer SLA understood | | |
-| 4 | No hardcoded secrets | | |
-| 5 | Input validation at the boundary | | |
-| 6 | SSO + dependency scanning | | |
-| 7 | Access logging (≥12 months) | | |
-| 8 | SAST in CI | | |
-| 9 | TLS + encryption at rest | | |
-| 10 | New-store check done; schema dictionary published | | |
-| 11 | Migrations versioned, no manual schema edits | | |
-| 12 | Sensitive columns tagged | | |
-| 13 | ReBAC `check()` used everywhere; no scattered role checks | | |
-| 14 | Relation grants logged | | |
-| 15 | Architecture & data-flow docs published | | |
-| 16 | Prompt/model version log (if applicable) | | |
-| 17 | CI pipeline complete; ≥1 reviewer per merge | | |
-| 18 | Environment separation with distinct credentials | | |
-| 19 | Structured logs + correlation id | | |
-| 20 | Health endpoint + central error tracking | | |
-| 21 | Fallback procedure documented | | |
-| 22 | Registered in Governance Hub | | |
-| 23 | Registered in RPA/utility hub | | |
-| 24 | 12-month review reminder set | | |
+| 3 | Contact-handoff SLA understood | | |
+| 4 | `OWNERSHIP_TRANSFER.md` created and current | | |
+| 5 | Business case completed (why / benefit / effort / cost) | | |
+| 6 | Business case presented for go-live sign-off | | |
+| 7 | No hardcoded secrets | | |
+| 8 | Input validation at the boundary | | |
+| 9 | SSO + dependency scanning | | |
+| 10 | Access logging (≥12 months) | | |
+| 11 | SAST in CI | | |
+| 12 | TLS + encryption at rest | | |
+| 13 | New-store check done; schema dictionary published | | |
+| 14 | Migrations versioned, no manual schema edits | | |
+| 15 | Sensitive columns tagged | | |
+| 16 | ReBAC `check()` used everywhere; no scattered role checks | | |
+| 17 | Relation grants logged | | |
+| 18 | Architecture & data-flow docs published | | |
+| 19 | Prompt/model version log (if applicable) | | |
+| 20 | CI pipeline complete; ≥1 reviewer per merge | | |
+| 21 | Environment separation with distinct credentials | | |
+| 22 | Structured logs + correlation id | | |
+| 23 | Health endpoint + central error tracking | | |
+| 24 | Fallback procedure documented | | |
+| 25 | Registered in Governance Hub | | |
+| 26 | Registered in RPA/utility hub | | |
+| 27 | 12-month review reminder set | | |
 
 **Risk tier confirmed:** Medium   **Overall result:** ☐ Certified ☐ Partial — remediation by: ______ ☐ Non-compliant — escalated to: ______
 **Audited by:** ________________  **Date:** ________________  **Next audit due:** ________________ (12 months)

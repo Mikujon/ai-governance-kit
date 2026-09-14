@@ -36,7 +36,7 @@ No "yes" anywhere → **Tier 0**.
 | Tier | Name | Typical example | Governance weight |
 |---|---|---|---|
 | **0** | Personal / throwaway | A one-off script to reformat a file, a quick chart for a meeting, a personal prompt template, a Sheets formula or Apps Script macro you run yourself now and then | Almost none — use good judgment, nothing to register |
-| **1** | Basic internal tool | A small script a team runs weekly, a personal report generator others start using, a Sheets/Apps Script automation that emails a scheduled report, a personal Zapier/Make flow | Light — named owner, basic security hygiene, no formal Hub record required but recommended |
+| **1** | Basic internal tool | A small script a team runs weekly, a personal report generator others start using, a Sheets/Apps Script automation that emails a scheduled report, a personal Zapier/Make flow | Light — business/technical contact named, Owner of record becomes the Governance Administrator (`GOVERNANCE.md` Section 2), basic security hygiene, no formal Hub record required but recommended |
 | **2** | Standard business tool | A departmental automation, a tool that reads/writes a shared database, an internal chatbot, an RPA bot or a Power Automate/Zapier/Make flow moving data between two systems | Full seven-pillar Hub record, without the heaviest security testing |
 | **3** | Critical / regulated | Anything touching customer or personal data, anything acting autonomously, anything customer-facing — no-code and low-code automations included; the platform doesn't change the tier | Full seven-pillar Hub record **and** the complete technical requirements in the AI Development Standard, including penetration testing and quarterly review |
 
@@ -52,8 +52,14 @@ Tier 3 projects must also follow the full **AI Development Standard** document (
 |---|---|---|---|---|
 | Problem statement (one line) | ○ | ● | ● | ● |
 | Full scope doc (in/out of scope, success metric) | — | — | ● | ● |
-| Named owner | — | ● | ● | ● (business **and** technical) |
+| Business case (why / benefit / effort / cost) | — | ○ (light) | ● | ● |
+| Business case presented for go-live sign-off | — | — | ○ | ● |
+| Owner of record = Governance Administrator (automatic, not chosen per project) | — (author) | ● | ● | ● |
+| Business contact named | ○ | ● | ● | ● |
+| Technical contact named | ○ | ● | ● | ● |
+| Infrastructure contact named | — | — | ● | ● |
 | RACI matrix | — | — | ○ | ● |
+| `OWNERSHIP_TRANSFER.md` created and kept current | — | ○ | ● | ● |
 | Secrets kept out of code (vault/env, never hardcoded) | ● | ● | ● | ● |
 | No personal/sensitive data without a check first | ● | ● | ● | ● |
 | Formal security/cyber review & sign-off | — | — | ○ | ● |
@@ -64,7 +70,7 @@ Tier 3 projects must also follow the full **AI Development Standard** document (
 | Registered in the AI Tools Governance Hub | — | ○ | ● | ● |
 | Registered in the RPA / utility hub | — | — | ● | ● |
 | Automatic review reminder | — | — | ● (12 mo) | ● (quarterly) |
-| Ownership-transfer SLA on attrition | — | — | ● | ● |
+| Contact-handoff SLA on attrition (5 business days) | — | ○ | ● | ● |
 
 ---
 
@@ -77,10 +83,21 @@ Each item is tagged with the tier it starts applying at — apply everything tag
 - **[T2+]** Add target users, expected usage, and explicit in-scope / out-of-scope.
 - **[T2+]** Define a success metric before building, not after.
 
+### Business case & cost/benefit
+- **[T1, light]** Write one line on why the project is worth doing, and name the monthly cost of any paid API/service it calls — "€0" is a valid, required answer, a blank field is not.
+- **[T2+]** Run the full business case in `AI_INTAKE_ASSESSMENT.md` Section 4: why now, expected benefit (quantified where possible), effort estimate, one-time cost, monthly recurring cost, and an explicit cost/benefit call.
+- **[T2+]** Record the business case in `PROJECT.md` under `## Business Case` — this is what a manager or the governance council reads when asked to approve or keep funding the project, so keep it current, not just accurate on the day it was written.
+- **[T3]** The business case is not filed-and-forgotten: it must be walked through out loud with the business contact's manager or the relevant governance seat (`GOVERNANCE.md`) before go-live, the same way the security sign-off is a real approval and not a checkbox.
+- **[T2+]** Re-run the cost/benefit call if the monthly cost changes materially after go-live (a model upgrade, a pricing change, usage growth) — a business case is a snapshot that goes stale, not a one-time form.
+
 ### Ownership
-- **[T1+]** Name a person accountable for the tool (even if it's the author, write it down somewhere findable).
-- **[T2+]** Separate business owner (value/retire decisions) and technical owner (maintenance).
-- **[T2+]** Ownership transfers within 5 business days of a role change or departure — never left pointing at someone who's gone.
+- **[T0]** The author is the owner, full stop — nothing below this applies.
+- **[T1+]** Owner of record is **not chosen per project** — it is the Chair / Governance Administrator seat, automatically, the moment a project crosses into T1 (`GOVERNANCE.md` Section 2). Do not put an individual employee's name in a Hub or Hub-equivalent "Owner" field for anything above T0.
+- **[T1+]** Name a **business contact** (whoever requested it / whoever it serves) and a **technical contact** (whoever builds/maintains it) — even if they're the same person, write both down somewhere findable. These are working roles, not the accountable owner.
+- **[T2+]** Also name an **infrastructure contact** — whoever owns the hosting/deploy environment the project runs on.
+- **[T1+]** Contacts hand off within 5 business days of a role change or departure — never left pointing at someone who's gone. This is a lighter event than it sounds: the Owner of record doesn't change, only the working contact does, so there's no governance gap to backfill, just a handoff to log.
+- **[T1+]** Create `OWNERSHIP_TRANSFER.md` from `OWNERSHIP_TRANSFER_TEMPLATE.md` and keep it current — access/credentials, current status, pending work, key contacts, and cost commitments a new contact would need on day one. People change roles and leave; a project's continuity can't depend on tribal knowledge held by one person who might not be reachable when the 5-day SLA clock starts. Review it at the same cadence as the project's own review reminder (below), not only when someone actually leaves.
+- **[T1+]** The Governance Administrator's role here is connective, not custodial — the standing point of contact between the business contact, the technical contact, the infrastructure contact, and stakeholder functions (Security, Legal/Compliance). They don't do the work; they're who "who do I ask about this" always resolves to, regardless of who else has changed.
 
 ### Security & data handling
 - **[T0+]** Never hardcode API keys, passwords, or tokens — use environment variables or the company vault, even for a throwaway script.
@@ -113,7 +130,7 @@ Each item is tagged with the tier it starts applying at — apply everything tag
 
 ### Central visibility (Hub & RPA/utility hub)
 - **[T1]** Registration is optional but encouraged if you expect others to eventually rely on it.
-- **[T2+]** Register the tool in the AI Tools Governance Hub with owner, scope, and data notes.
+- **[T2+]** Register the tool in the AI Tools Governance Hub with Owner of record (Governance Administrator), business/technical/infrastructure contacts, scope, and data notes.
 - **[T2+]** Register in the RPA/utility hub so usage and estimated savings roll up into company-wide reporting, whether or not it's built on the RPA platform.
 - **[T3]** Keep the savings/usage figures refreshed at least quarterly.
 

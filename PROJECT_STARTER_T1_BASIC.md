@@ -11,7 +11,11 @@
 > **What problem does this solve, and for whom?**
 > ______________________________________________
 >
-> **Owner:** ______________________ (one person, accountable even if they're also the builder)
+> **Owner of record:** Governance Administrator — see `GOVERNANCE.md` (automatic from this tier up, not chosen per project)
+> **Business/technical contact:** ______________________________________________ (one person is fine at this tier if they're doing both jobs — write it down even if it's the author)
+>
+> **Why now (business case, light):** ______________________________________________
+> **Monthly recurring cost** (API/hosting/subscription — write "€0" if none): ______________________________________________
 
 ## 2. Structure
 
@@ -19,6 +23,7 @@
 project-root/
 ├── README.md            # what it is, how to run it, who owns it
 ├── PROJECT.md            # the problem statement above
+├── OWNERSHIP_TRANSFER.md # recommended — from OWNERSHIP_TRANSFER_TEMPLATE.md
 ├── .env.example
 ├── src/
 └── tests/
@@ -33,7 +38,9 @@ project-root/
 ## 4. Requirements
 
 **Ownership**
-- [ ] A named owner is written down in `PROJECT.md` (Section 1) — even if it's the author.
+- [ ] Owner of record recorded as the Governance Administrator in `PROJECT.md` (Section 1) — not an individual name.
+- [ ] A named business/technical contact is written down in `PROJECT.md` (Section 1) — even if it's the author.
+- [ ] `OWNERSHIP_TRANSFER.md` created from `OWNERSHIP_TRANSFER_TEMPLATE.md` (recommended at this tier — cheaper to do now than to reconstruct after someone's left).
 
 **Security**
 - [ ] No secret is hardcoded — use `.env` (git-ignored) locally; use the company vault if this ever runs in a shared environment.
@@ -51,12 +58,15 @@ project-root/
 
 | # | Requirement | Status (Pass/Fail/N-A) | Evidence |
 |---|---|---|---|
-| 1 | Problem statement & owner written | | |
-| 2 | No hardcoded secrets | | |
-| 3 | Sensitive-data classification checked | | |
-| 4 | SSO used for any login | | |
-| 5 | Dependencies pinned | | |
-| 6 | README complete | | |
+| 1 | Problem statement & business/technical contact written | | |
+| 2 | Owner of record correctly shows Governance Administrator, not an individual | | |
+| 3 | Business case (light): why + monthly cost named | | |
+| 4 | `OWNERSHIP_TRANSFER.md` created | | |
+| 5 | No hardcoded secrets | | |
+| 6 | Sensitive-data classification checked | | |
+| 7 | SSO used for any login | | |
+| 8 | Dependencies pinned | | |
+| 9 | README complete | | |
 
 **Audited by:** ________________  **Date:** ________________
 

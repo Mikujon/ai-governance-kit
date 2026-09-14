@@ -25,14 +25,14 @@ This kit exists to answer one original brief in a way that scales to every proje
 ## 4. A scope of the tool and the problem it resolves
 
 - **Defined:** every starter's Section 1 is a problem-statement template, scaled by tier — one line at T0/T1, full in-scope/out-of-scope/success-metric at T2/T3. `reference/AI_Development_Standard.docx` Appendix C is the full problem-statement template for Tier 3.
-- **Enforced:** `AI_INTAKE_ASSESSMENT.md` collects this *during the classification interview itself*, so it exists before a line of code is written, and the assistant pre-fills the starter's Section 1 from the interview rather than asking twice.
+- **Enforced:** `AI_INTAKE_ASSESSMENT.md` collects this *during the classification interview itself*, so it exists before a line of code is written, and the assistant pre-fills the starter's Section 1 from the interview rather than asking twice. The same interview (Section 4) immediately follows scope with the business case — why the project needs to exist, expected benefit, effort, and cost — so scope and justification are captured in one sitting, not two.
 - **Visible:** the Governance Hub's "Scope" field is the same text, one field, one source of truth — not a document that drifts from what the Hub says.
 
 ## 5. An owner, for future development, features, or switching the tool off
 
-- **Defined:** Requirements matrix row "Named owner" (from T1) and "business **and** technical owner" (T2+). `AI_PROJECT_GUIDELINES.md` Section 4 "Ownership", including a 5-business-day transfer SLA on a role change or departure.
-- **Enforced:** every starter from T1 up has an explicit owner field in its problem statement, and `AI_INTAKE_ASSESSMENT.md` Section 4's classification record now includes an `Owner` line (see below) so it's recorded at classification time, not left to be filled in later and forgotten.
-- **Visible:** the Governance Hub's "Ownership" panel shows business + technical owner per tool — this is exactly the field a manager checks when someone leaves, before a tool is left ownerless.
+- **Defined:** `GOVERNANCE.md` Section 2 — at T0 the author is the owner; from T1 up, the accountable **Owner of record is the Chair / Governance Administrator seat**, not an individual employee, precisely because that seat has a written continuity plan (`GOVERNANCE.md` Section 4) and an individual employee doesn't. Requirements matrix rows "Owner of record = Governance Administrator", "Business/Technical/Infrastructure contact named" (`AI_PROJECT_GUIDELINES.md` Section 3). The working roles that actually do the day-to-day work — business, technical, and (from T2) infrastructure contact — are separate from that accountable owner by design.
+- **Enforced:** every starter from T1 up has an explicit Owner-of-record line (fixed at "Governance Administrator") plus contact fields in its problem statement, and `AI_INTAKE_ASSESSMENT.md` Section 5's classification record captures both, so a builder can't accidentally leave a Hub-equivalent "Owner" field pointing at a person who might leave. Every project from T1 up also carries its own `OWNERSHIP_TRANSFER.md` (`OWNERSHIP_TRANSFER_TEMPLATE.md`) — access checklist, current status, pending work, cost commitments, and a log of *contact* handoffs — kept current as a living document. Because the accountable owner never changes, a contact handoff is a logged event, not a governance emergency; the 5-business-day SLA (`AI_PROJECT_GUIDELINES.md` Section 4) only ever has to catch a working-role change, never an ownership vacuum.
+- **Visible:** the Governance Hub's "Ownership" panel shows the Owner of record (Governance Administrator) plus the current business/technical/infrastructure contacts per tool — the panel a manager checks when someone leaves shows a contact to update, not an emergency to escalate.
 
 ## 6. An automatic reminder for the tool to be checked for cyber and utility
 
@@ -43,7 +43,7 @@ This kit exists to answer one original brief in a way that scales to every proje
 ## 7. Inclusion on the automatic utility/RPA hub, to understand utilization and savings
 
 - **Defined:** Requirements matrix rows "Registered in the AI Tools Governance Hub" and "Registered in the RPA / utility hub" (both from T2). `AI_PROJECT_GUIDELINES.md` Section 4 "Central visibility".
-- **Enforced:** T2/T3 starters both list Hub + RPA/utility-hub registration as a go-live requirement, and T3 keeps the savings/usage figures refreshed at least quarterly.
+- **Enforced:** T2/T3 starters both list Hub + RPA/utility-hub registration as a go-live requirement, and T3 keeps the savings/usage figures refreshed at least quarterly. The estimated-savings figure itself isn't invented at registration time — it's the same "expected benefit" (B2) and "monthly recurring cost" (B5) numbers already captured in the business case (`AI_INTAKE_ASSESSMENT.md` Section 4, `PROJECT.md`'s `## Business Case`), carried forward rather than re-estimated from scratch.
 - **Visible:** the Governance Hub's "RPA / utility hub" panel is a single yes/no plus an estimated-savings field per tool — deliberately simple, so it rolls up next to actual RPA-platform tools even when the automation itself was never built on that platform (a Python script, a Sheets macro, a Power Automate flow — see "This also covers…" in `00_START_HERE.md`).
 
 ---
