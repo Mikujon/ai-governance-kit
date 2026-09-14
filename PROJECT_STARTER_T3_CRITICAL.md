@@ -22,7 +22,8 @@
 >
 > **Success metric:** ______________________________________________
 >
-> **Business owner:** ________________  **Technical owner:** ________________
+> **Owner of record:** Governance Administrator — see `GOVERNANCE.md` (automatic from Tier 1 up, not chosen per project)
+> **Business contact:** ________________  **Technical contact:** ________________  **Infrastructure contact:** ________________
 > **Risk tier confirmed as High** because: ______________________________________________
 
 > **Business case**
@@ -45,6 +46,8 @@
 | Go-live decision | | | | |
 | Scheduled review | | | | |
 | Retire / decommission | | | | |
+
+> The **Accountable** column is normally the Governance Administrator (`GOVERNANCE.md` Section 2) — business, technical, and infrastructure contacts are typically **Responsible** or **Consulted**, not Accountable. This is deliberate: it's the same design as everywhere else in this file, applied to the RACI.
 
 ## 2. Structure
 
@@ -88,14 +91,14 @@ Same as Tier 2 (TypeScript/Python, NestJS/FastAPI, PostgreSQL, Redis, Docker), w
 
 These must all be closed, not merely planned, before release:
 
-- [ ] Business case walked through out loud with the business owner's manager or the relevant governance seat — recorded in `PROJECT.md` (who, when), not just written down unread.
+- [ ] Business case walked through out loud with the business contact's manager or the relevant governance seat — recorded in `PROJECT.md` (who, when), not just written down unread.
 - [ ] `OWNERSHIP_TRANSFER.md` created and current — access checklist, status, pending work, cost commitments.
 - [ ] Written security approval recorded in the Hub (approver, risk tier, date, expiry).
 - [ ] Penetration test completed.
 - [ ] Prompt-injection / data-leakage risk assessed and documented.
 - [ ] Third-party AI/model provider reviewed for data residency; DPA signed if personal data leaves the company.
 - [ ] Data retention & deletion policy implemented, not just written.
-- [ ] Runbook and exception/fallback procedure written and understood by the technical owner's team (not only the original author).
+- [ ] Runbook and exception/fallback procedure written and understood by the technical contact's team (not only the original author).
 - [ ] Rollback procedure tested at least once.
 - [ ] Two approvers on any change touching `src/auth/`, `src/ai/`, or Confidential+ data.
 - [ ] Registered in the AI Tools Governance Hub and the RPA/utility hub.

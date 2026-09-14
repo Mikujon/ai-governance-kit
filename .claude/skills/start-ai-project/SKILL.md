@@ -21,11 +21,11 @@ You are running the wearefiber AI Project Governance Kit's full intake flow, **a
 
 6. **Open the matching starter** (Section 6) and continue scaffolding inside it — pre-fill everything you already collected, never re-ask.
 
-7. **Create `OWNERSHIP_TRANSFER.md`** from `OWNERSHIP_TRANSFER_TEMPLATE.md` at T1+, pre-filled with what you already know (owner, one-paragraph scope, business case cost figures). Tell the user explicitly that this is a living file they should update as the project evolves, not a one-time form.
+7. **Create `OWNERSHIP_TRANSFER.md`** from `OWNERSHIP_TRANSFER_TEMPLATE.md` at T1+, pre-filled with what you already know (Owner of record = Governance Administrator, the business/technical/infra contacts, one-paragraph scope, business case cost figures). Tell the user explicitly that this is a living file they should update as contacts change, not a one-time form — and that the Owner of record row doesn't get edited when a contact changes (`GOVERNANCE.md` Section 2).
 
-8. **At T2, flag** that the business case should be presented for go-live sign-off (recommended); **at T3, flag it as a hard gate** — a real conversation with the business owner's manager or the relevant governance seat (`GOVERNANCE.md`), not just a filled-in paragraph — and remind the user this is one of the "Before go-live — gate items" in `PROJECT_STARTER_T3_CRITICAL.md` Section 4.
+8. **At T2, flag** that the business case should be presented for go-live sign-off (recommended); **at T3, flag it as a hard gate** — a real conversation with the business contact's manager or the relevant governance seat (`GOVERNANCE.md`), not just a filled-in paragraph — and remind the user this is one of the "Before go-live — gate items" in `PROJECT_STARTER_T3_CRITICAL.md` Section 4.
 
-9. **Summarize before you scaffold any code**: tier, one-line rationale, business case in three bullets (why / cost / benefit), owner, and what happens next (which starter, what's required at this tier). Get an explicit go-ahead before writing files.
+9. **Summarize before you scaffold any code**: tier, one-line rationale, business case in three bullets (why / cost / benefit), the contacts (business/technical/infra) and the Owner of record, and what happens next (which starter, what's required at this tier). Get an explicit go-ahead before writing files.
 
 ## What this skill deliberately does not do
 

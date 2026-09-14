@@ -17,7 +17,8 @@
 >
 > **Success metric:** ______________________________________________
 >
-> **Business owner:** ________________  **Technical owner:** ________________
+> **Owner of record:** Governance Administrator — see `GOVERNANCE.md` (automatic from Tier 1 up, not chosen per project)
+> **Business contact:** ________________  **Technical contact:** ________________  **Infrastructure contact:** ________________
 
 > **Business case**
 > - Why now: ______________________________________________
@@ -72,9 +73,10 @@ project-root/
 ## 4. Requirements
 
 **Ownership**
-- [ ] Business owner and technical owner both named (Section 1).
-- [ ] A RACI matrix is completed for the project (recommended at this tier, required at Tier 3).
-- [ ] Ownership transfers within 5 business days of a role change or departure.
+- [ ] Owner of record shows the Governance Administrator (Section 1) — never an individual employee's name.
+- [ ] Business, technical, and infrastructure contacts all named (Section 1).
+- [ ] A RACI matrix is completed for the project (recommended at this tier, required at Tier 3) — the "Accountable" column is normally the Governance Administrator by design; contacts are typically "Responsible" or "Consulted".
+- [ ] Contacts hand off within 5 business days of a role change or departure — the Owner of record doesn't change, so this is a handoff to log, not an ownership gap to fill.
 - [ ] `OWNERSHIP_TRANSFER.md` created from `OWNERSHIP_TRANSFER_TEMPLATE.md` and kept current — reviewed at the same cadence as the 12-month check below, not only when someone actually leaves.
 
 **Business case**
@@ -118,7 +120,7 @@ project-root/
 - [ ] Manual fallback procedure documented in `docs/architecture.md`.
 
 **Governance visibility**
-- [ ] Registered in the AI Tools Governance Hub with owner, scope, and data notes.
+- [ ] Registered in the AI Tools Governance Hub with Owner of record, contacts, scope, and data notes.
 - [ ] Registered in the RPA / utility hub with usage/savings tracking.
 - [ ] Automatic review reminder set for 12 months (cyber + utility check).
 
@@ -126,9 +128,9 @@ project-root/
 
 | # | Requirement | Status (Pass/Fail/N-A) | Evidence |
 |---|---|---|---|
-| 1 | Business & technical owner named | | |
+| 1 | Owner of record = Governance Administrator; business/technical/infra contacts named | | |
 | 2 | RACI completed | | |
-| 3 | Ownership-transfer SLA understood | | |
+| 3 | Contact-handoff SLA understood | | |
 | 4 | `OWNERSHIP_TRANSFER.md` created and current | | |
 | 5 | Business case completed (why / benefit / effort / cost) | | |
 | 6 | Business case presented for go-live sign-off | | |

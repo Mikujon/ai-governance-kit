@@ -1,6 +1,6 @@
 # Start here — pick the right project starter
 
-This is the index for the AI project-governance document set, maintained at `wearefiber/ai-governance-kit`. If you'd rather see the whole thing as diagrams before reading file by file, start with **[`PROCESS_FLOW.md`](./PROCESS_FLOW.md)** — it maps intake, build gates, the post-go-live review/transfer loop, and who decides what, each box pointing back to the file that actually governs it.
+This is the index for the AI project-governance document set, maintained at `wearefiber/ai-governance-kit`. If you'd rather see the whole thing as diagrams before reading file by file, start with **[`PROCESS_FLOW.md`](./PROCESS_FLOW.md)** — it maps intake, build gates, who owns what above Tier 0, the post-go-live review/transfer loop, and who decides what, each box pointing back to the file that actually governs it.
 
 ## Why this exists
 
@@ -87,7 +87,7 @@ When it's time to check a project is compliant, open its starter file (and, for 
 | File | What it's for |
 |---|---|
 | `00_START_HERE.md` | This index. |
-| `PROCESS_FLOW.md` | The whole kit as four flow diagrams: intake, build gates by tier, the post-go-live review/transfer loop, and the governance escalation path. |
+| `PROCESS_FLOW.md` | The whole kit as five flow diagrams: intake, build gates by tier, the ownership hub-and-spoke model above Tier 0, the post-go-live review/transfer loop, and the governance escalation path. |
 | `AI_INTAKE_ASSESSMENT.md` | Gives the AI assistant a script to interview the user and self-determine the tier (Option A). |
 | `PROJECT_STARTER_T0_PERSONAL.md` | Starter kit for personal / throwaway scripts and reports. |
 | `PROJECT_STARTER_T1_BASIC.md` | Starter kit for small internal tools with a handful of users. |

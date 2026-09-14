@@ -74,7 +74,7 @@ project-root/
 
 **[T3]** additionally requires: a `SECURITY.md` documenting the approved data classification and the security sign-off reference, and a `docs/exceptions.md` for manual fallback procedures.
 
-Every repository's `README.md` links to its record in the **AI Tools Governance Hub** — the Hub record is the source of truth for owner, scope and review date; the README is the entry point for a developer or auditor to find it.
+Every repository's `README.md` links to its record in the **AI Tools Governance Hub** — the Hub record is the source of truth for Owner of record, contacts, scope and review date; the README is the entry point for a developer or auditor to find it.
 
 ---
 
@@ -122,8 +122,9 @@ Every permission is a **tuple**: `(object, relation, subject)`.
 document:invoice-123   #owner    user:jetmir
 document:invoice-123   #viewer   group:finance#member
 report:q3-summary      #editor   user:arben
-tool:invoice-bot        #owner    user:jetmir      # ties back to the Hub's business owner
-tool:invoice-bot        #operator user:driton       # ties back to the Hub's technical owner
+tool:invoice-bot        #owner    user:jetmir      # this is the technical contact with admin rights on the object,
+                                                     # not the Hub's Owner of record — see GOVERNANCE.md Section 2
+tool:invoice-bot        #operator user:driton       # day-to-day operator, ties back to the Hub's technical contact
 ```
 
 A subject can itself be a set — `group:finance#member` means "anyone who is a member of the finance group" — which is how group and inherited permissions are expressed without duplicating tuples per person.
@@ -137,7 +138,7 @@ Define these relations consistently across projects unless a project genuinely n
 | `owner` | Full control, including granting access to others and deleting the object. |
 | `editor` | Can modify the object's content. |
 | `viewer` | Can read the object. |
-| `operator` | Can run/operate a tool without owning its data (maps to the Hub's technical owner). |
+| `operator` | Can run/operate a tool without owning its data (maps to the Hub's technical contact). |
 | `member` | Membership in a group, used as a subject set for the relations above. |
 
 ### 4.3 Implementation guidance by tier
@@ -221,7 +222,7 @@ Applies to any project with a user interface.
 - The manual fallback procedure (what a human does if the tool is down) is written down in `docs/architecture.md` or `docs/exceptions.md`.
 
 **[T3]**
-- On-call escalation path is documented in `docs/runbook.md` and known to the technical owner's team, not only the original author.
+- On-call escalation path is documented in `docs/runbook.md` and known to the technical contact's team, not only the original author.
 - Key metrics (usage volume, error rate, latency) feed into the RPA/utility hub reporting required by `AI_Development_Standard` §5.7.
 
 ---

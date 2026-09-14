@@ -11,7 +11,8 @@
 > **What problem does this solve, and for whom?**
 > ______________________________________________
 >
-> **Owner:** ______________________ (one person, accountable even if they're also the builder)
+> **Owner of record:** Governance Administrator — see `GOVERNANCE.md` (automatic from this tier up, not chosen per project)
+> **Business/technical contact:** ______________________________________________ (one person is fine at this tier if they're doing both jobs — write it down even if it's the author)
 >
 > **Why now (business case, light):** ______________________________________________
 > **Monthly recurring cost** (API/hosting/subscription — write "€0" if none): ______________________________________________
@@ -37,7 +38,8 @@ project-root/
 ## 4. Requirements
 
 **Ownership**
-- [ ] A named owner is written down in `PROJECT.md` (Section 1) — even if it's the author.
+- [ ] Owner of record recorded as the Governance Administrator in `PROJECT.md` (Section 1) — not an individual name.
+- [ ] A named business/technical contact is written down in `PROJECT.md` (Section 1) — even if it's the author.
 - [ ] `OWNERSHIP_TRANSFER.md` created from `OWNERSHIP_TRANSFER_TEMPLATE.md` (recommended at this tier — cheaper to do now than to reconstruct after someone's left).
 
 **Security**
@@ -56,14 +58,15 @@ project-root/
 
 | # | Requirement | Status (Pass/Fail/N-A) | Evidence |
 |---|---|---|---|
-| 1 | Problem statement & owner written | | |
-| 2 | Business case (light): why + monthly cost named | | |
-| 3 | `OWNERSHIP_TRANSFER.md` created | | |
-| 4 | No hardcoded secrets | | |
-| 5 | Sensitive-data classification checked | | |
-| 6 | SSO used for any login | | |
-| 7 | Dependencies pinned | | |
-| 8 | README complete | | |
+| 1 | Problem statement & business/technical contact written | | |
+| 2 | Owner of record correctly shows Governance Administrator, not an individual | | |
+| 3 | Business case (light): why + monthly cost named | | |
+| 4 | `OWNERSHIP_TRANSFER.md` created | | |
+| 5 | No hardcoded secrets | | |
+| 6 | Sensitive-data classification checked | | |
+| 7 | SSO used for any login | | |
+| 8 | Dependencies pinned | | |
+| 9 | README complete | | |
 
 **Audited by:** ________________  **Date:** ________________
 

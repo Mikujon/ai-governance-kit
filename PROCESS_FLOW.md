@@ -38,7 +38,7 @@ flowchart TD
 
     subgraph T1["T1 — Basic"]
         direction TB
-        T1a["Build"] --> T1b["Owner named +<br/>business case (light) +<br/>OWNERSHIP_TRANSFER.md (recommended)"] --> T1c(["Go-live<br/>(no formal sign-off required)"])
+        T1a["Build"] --> T1b["Owner of record = Governance<br/>Administrator (automatic) +<br/>business/technical contact named +<br/>business case (light) +<br/>OWNERSHIP_TRANSFER.md (recommended)"] --> T1c(["Go-live<br/>(no formal sign-off required)"])
     end
 
     subgraph T2["T2 — Standard"]
@@ -51,7 +51,7 @@ flowchart TD
     subgraph T3["T3 — Critical"]
         direction TB
         T3a["Build"] --> T3b["Full business case +<br/>OWNERSHIP_TRANSFER.md +<br/>RACI (required)"]
-        T3b --> T3c["Business case presented to<br/>business owner's manager or<br/>governance seat — MANDATORY GATE"]
+        T3b --> T3c["Business case presented to<br/>business contact's manager or<br/>governance seat — MANDATORY GATE"]
         T3c --> T3d["Security sign-off + pen test +<br/>prompt-injection review +<br/>DPA if data leaves the company"]
         T3d --> T3e["Hub + RPA/utility hub<br/>registration"] --> T3f(["Go-live"])
     end
@@ -61,7 +61,25 @@ flowchart TD
 
 ---
 
-## 3. After go-live — the loop nothing above shows
+## 3. Ownership above Tier 0 — one constant hub, rotating spokes
+
+From T1 up, "who owns this" and "who's currently doing the work" are answered by two different things — that split is the whole point of `GOVERNANCE.md` Section 2, and it's the piece a table doesn't make obvious.
+
+```mermaid
+flowchart LR
+    O(["Owner of record<br/>Chair / Governance Administrator<br/>— constant, T1+"])
+    O <--> BC["Business contact<br/>(rotates)"]
+    O <--> TC["Technical contact<br/>(rotates)"]
+    O <--> IC["Infrastructure contact<br/>(rotates, T2+)"]
+    O <--> SEC["Security seat"]
+    O <--> LEG["Legal / Compliance seat"]
+```
+
+The Owner of record sits in the middle and never moves — not because it does the work, but because it's the one node in this diagram with a written continuity plan (`GOVERNANCE.md` Section 4). Every spoke can rotate independently — a business contact moves teams, a technical contact leaves, an infrastructure contact changes — without the diagram's center ever needing to be redrawn. `OWNERSHIP_TRANSFER.md` is what logs a spoke changing; it is deliberately *not* where the center gets reassigned.
+
+---
+
+## 4. After go-live — the loop nothing above shows
 
 A project doesn't end at go-live. This is the part most governance write-ups skip, and it's the part `PILLARS_COVERAGE.md` Pillars 5–7 exist to force.
 
@@ -79,21 +97,21 @@ flowchart TD
     H --> I{"Fix, retire, or<br/>escalate?"}
     I -->|Fix| C
     I -->|Retire| Z(["Decommission"])
-    I -->|Escalate| J["Governance council<br/>GOVERNANCE.md §2"]
+    I -->|Escalate| J["Governance council<br/>GOVERNANCE.md §3"]
 
-    K["Owner changes role<br/>or leaves — any time"] -.-> L["Open OWNERSHIP_TRANSFER.md<br/>Sections 1 & 3 first:<br/>secure access, then understand"]
-    L --> M["5-business-day SLA<br/>AI_PROJECT_GUIDELINES.md §4"]
+    K["A contact (business, technical,<br/>or infra) changes role<br/>or leaves — any time"] -.-> L["Open OWNERSHIP_TRANSFER.md<br/>Sections 1 & 3 first:<br/>secure access, then understand"]
+    L --> M["5-business-day SLA<br/>AI_PROJECT_GUIDELINES.md §4<br/>(Owner of record doesn't change —<br/>this is a handoff, not a vacancy)"]
     M --> N["Log the transfer<br/>OWNERSHIP_TRANSFER.md §8"]
     N -.-> C
 ```
 
-**Two loops, one file each:** the top loop (review cadence) lives in `AI_PROJECT_GUIDELINES.md` Section 5; the ownership loop (dashed lines — it can trigger at any point, not on a schedule) lives entirely in `OWNERSHIP_TRANSFER.md` itself. They're drawn separately because they fire on different triggers, but they read the same underlying record: a stale `OWNERSHIP_TRANSFER.md` is exactly as much of a finding as a missed review.
+**Two loops, one file each:** the top loop (review cadence) lives in `AI_PROJECT_GUIDELINES.md` Section 5; the contact-handoff loop (dashed lines — it can trigger at any point, not on a schedule) lives entirely in `OWNERSHIP_TRANSFER.md` itself. They're drawn separately because they fire on different triggers, but they read the same underlying record: a stale `OWNERSHIP_TRANSFER.md` is exactly as much of a finding as a missed review. Note what never appears in this loop: the Owner of record (Section 3) — that box doesn't have an arrow into it, on purpose.
 
 ---
 
-## 4. Who decides — the escalation flow
+## 5. Who decides — the escalation flow
 
-This is `GOVERNANCE.md` redrawn as a flow instead of a table, for the moments a builder needs "who do I actually ask" faster than reading Section 2 of that file.
+This is `GOVERNANCE.md` redrawn as a flow instead of a table, for the moments a builder needs "who do I actually ask" faster than reading Section 3 of that file.
 
 ```mermaid
 flowchart TD
@@ -110,7 +128,7 @@ flowchart TD
     F --> H
     G --> H
 
-    I["Chair unavailable<br/>> 5 business days"] -.-> J["Security seat becomes<br/>interim Chair for<br/>CODEOWNERS + T3 sign-off"]
+    I["Chair unavailable<br/>> 5 business days"] -.-> J["Security seat becomes<br/>interim Chair for<br/>CODEOWNERS + T3 sign-off +<br/>Owner of record"]
     J -.-> K["Joint review of anything<br/>merged during the gap,<br/>at next council meeting"]
 ```
 

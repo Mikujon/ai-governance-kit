@@ -59,7 +59,7 @@ A tier tells you how much governance a project needs. It says nothing about whet
 | **T0** | Nothing — a throwaway script doesn't need a business case. |
 | **T1** | One line each on B1 and B3 below (why, and roughly how long it took/will take). If it calls any paid API or service, name the monthly cost (B5) even if it's small — "€0" is fine, silence is not. |
 | **T2** | Full business case, B1–B6. |
-| **T3** | Full business case, B1–B6, **and** it must be walked through out loud with the business owner's manager or the relevant governance seat before go-live (see `GOVERNANCE.md`) — a paragraph in `PROJECT.md` is not a substitute for someone with budget authority actually seeing the numbers. |
+| **T3** | Full business case, B1–B6, **and** it must be walked through out loud with the business contact's manager or the relevant governance seat before go-live (see `GOVERNANCE.md`) — a paragraph in `PROJECT.md` is not a substitute for someone with budget authority actually seeing the numbers. |
 
 Ask these in your own words, same conversational style as Section 2:
 
@@ -70,7 +70,7 @@ Ask these in your own words, same conversational style as Section 2:
 | B3 | How much effort will it take to build — a rough size (S / M / L / XL) or a days/weeks estimate, and who's doing it? | Sets expectations before anyone commits calendar time, and gives a manager the number they need to actually approve the work. |
 | B4 | Is there a one-time cost — licenses, contractor time, paid tooling to set up? | Separate from the ongoing cost below (B5); often forgotten until an invoice shows up mid-project. |
 | B5 | What will this cost every month once it's running — API/token usage, hosting, subscriptions, any paid service? | This is the number that turns into silent technical debt fastest: nobody notices one €40/month API bill until forty of them exist across the company. Required for T1+ even when the honest answer is "€0" — write the zero down, don't leave the field blank. |
-| B6 | Given B2 through B5, does the benefit clearly outweigh the cost — and if it's a close call, who should decide? | Forces the comparison to actually happen once, on paper, instead of being silently assumed. A close call routes to the business owner's manager or a governance seat, not to a shrug. |
+| B6 | Given B2 through B5, does the benefit clearly outweigh the cost — and if it's a close call, who should decide? | Forces the comparison to actually happen once, on paper, instead of being silently assumed. A close call routes to the business contact's manager or a governance seat, not to a shrug. |
 
 If the honest answer to B1 is "I'm not sure yet, I just wanted to try it" — that's a legitimate answer at T0/T1, but say so plainly in the `PROJECT.md` record rather than backfilling a justification after the fact. A small experiment is allowed to not have a business case yet; a T2/T3 project that gets shared, scheduled, and relied on is not.
 
@@ -83,7 +83,10 @@ Before scaffolding anything, create or append this block to the project's `PROJE
 - Date: <today's date>
 - Assessed by: AI-assisted intake (assistant name), confirmed by <user name>
 - Kit version used: <git tag, e.g. v1.0.0 — from wearefiber/ai-governance-kit>
-- Owner: <name — the person accountable for this tool, from Q1/ownership discussion; write it down here even if it's the same person running the interview>
+- Owner of record: <T0 only: the author. T1+: "Governance Administrator — see GOVERNANCE.md" — never an individual employee's name; ownership isn't chosen per project above T0>
+- Business contact: <name, from Q1/ownership discussion — omit only at T0>
+- Technical contact: <name — omit only at T0; same as business contact if that's genuinely one person>
+- Infrastructure contact: <name — T2+ only, whoever owns the hosting/deploy environment>
 - Resulting tier: T<0–3>
 - Key answers:
   - Reach / persistence / external calls: <summary>
@@ -119,4 +122,4 @@ Continue the conversation inside that file's structure — you already have the 
 
 At T1+, also create `OWNERSHIP_TRANSFER.md` from `OWNERSHIP_TRANSFER_TEMPLATE.md` in the project root, pre-filled with the owner and scope you already have — it's a living document kept current as the project evolves, not a form filled in once and forgotten. Its entire point is that the project survives its current owner leaving; a stale one is barely better than none.
 
-At T3, do not treat the business case as filed-and-forgotten once it's in `PROJECT.md`: it must actually be walked through with the business owner's manager or the relevant governance seat before go-live (Section 4), the same way the security sign-off is a real approval and not a checkbox.
+At T3, do not treat the business case as filed-and-forgotten once it's in `PROJECT.md`: it must actually be walked through with the business contact's manager or the relevant governance seat before go-live (Section 4), the same way the security sign-off is a real approval and not a checkbox.
