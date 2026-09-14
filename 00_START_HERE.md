@@ -95,5 +95,6 @@ When it's time to check a project is compliant, open its starter file (and, for 
 | `AI_PROJECT_STRUCTURE.md` | The full technical standard behind these starters — stack, ReBAC, data, design, CI/CD (reference only). |
 | `reference/AI_Development_Standard.docx` | The complete governance policy and 42-point audit checklist for Tier 3. |
 | `reference/Guida_Uso_Kit_Governance_AI.docx` | Step-by-step user guide (Italian) for people using the kit day to day. |
-| `PILLARS_COVERAGE.md` | Maps each of the 7 founding requirements to exactly where it's defined, enforced, and tracked. Read this first if you're being asked "does this kit actually cover X?" |
+| `PILLARS_COVERAGE.md` | Maps each of the 7 founding requirements to exactly where it's defined, enforced, and tracked, plus a crosswalk to NIST AI RMF / EU AI Act / ISO 42001. Read this first if you're being asked "does this kit actually cover X?" |
 | `AI_ASSISTANT_USAGE_GUIDE.md` | How to actually run Claude Code / Codex CLI: install, which mode to use, how to cut token/cost usage, and — critically — what the assistant must never be given access to. Read this before your first real session, regardless of tier. |
+| `GOVERNANCE.md` | Who decides: the four-seat governance council, what needs whose approval, and the continuity plan if the Governance Administrator is unavailable. Read this if you're escalating a Tier 3 sign-off or a disputed classification. |
