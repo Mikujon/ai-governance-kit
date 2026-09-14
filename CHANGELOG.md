@@ -2,7 +2,7 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
-## [Unreleased]
+## [1.3.1] — 2026-09-14
 
 ### Corretto
 - `README.md`, `00_START_HERE.md` — i comandi di clone e l'URL raw puntavano ancora al tag `v1.1.0`; ora puntano a `v1.3.0`, l'ultima versione disponibile.
