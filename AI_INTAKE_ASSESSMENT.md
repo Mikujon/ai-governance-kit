@@ -2,7 +2,7 @@
 
 **When to use this file:** the moment someone tells you they want to build a new AI tool or automation — before you scaffold anything, choose a stack, or pick a starter kit. Don't hand the user a table and ask them to self-classify: run this interview yourself, decide the tier, and tell them what you concluded and why.
 
-This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. See `PILLARS_COVERAGE.md` if you need to justify to the user *why* a question matters — it maps every question back to the founding requirement behind it. Point the user (and yourself, if you're the assistant conducting this interview) at `AI_ASSISTANT_USAGE_GUIDE.md` before scaffolding anything — it covers which permission mode to run in and what you must never be given access to, and applies regardless of the tier this interview lands on. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.3.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
+This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. See `PILLARS_COVERAGE.md` if you need to justify to the user *why* a question matters — it maps every question back to the founding requirement behind it. Point the user (and yourself, if you're the assistant conducting this interview) at `AI_ASSISTANT_USAGE_GUIDE.md` before scaffolding anything — it covers which permission mode to run in and what you must never be given access to, and applies regardless of the tier this interview lands on. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.4.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
 
 ---
 
@@ -17,9 +17,10 @@ Your job in this interview is to actively find the tier that best fits the proje
 3. If an answer is vague ("not sure," "maybe," "a bit of both"), ask the one concrete follow-up suggested below instead of accepting it as final — a real answer is almost always available with one more question.
 4. Stop early once a tier is already locked in: if the user has confirmed a Tier 3 trigger, you don't need to keep asking Tier 0/1 questions.
 5. State the resulting tier and a one- or two-sentence reason back to the user, and get their agreement before proceeding — this is a judgment call, and they may know context you don't (a "quick script" that quietly touches customer data, for instance).
-6. Record the assessment (Section 4) in the project's `PROJECT.md` before you scaffold anything.
-7. Open the matching starter file (Section 5) and continue from there, pre-filling its problem-statement fields from what you already learned in the interview — don't make the user repeat themselves.
-8. If the project's scope changes materially while you're building it (a new data source, a new integration, a new user group), re-run the relevant questions and say plainly if the tier changes.
+6. Once the tier is settled, run the business case in Section 4 — scaled the same way, skipped entirely at T0.
+7. Record the assessment (Section 5) in the project's `PROJECT.md` before you scaffold anything.
+8. Open the matching starter file (Section 6) and continue from there, pre-filling its problem-statement and business-case fields from what you already learned in the interview — don't make the user repeat themselves.
+9. If the project's scope changes materially while you're building it (a new data source, a new integration, a new user group), re-run the relevant questions and say plainly if the tier changes.
 
 ## 2. The interview questions
 
@@ -49,7 +50,31 @@ Apply the highest tier triggered by any answer — never average or split the di
 
 If you're genuinely unsure even after the follow-up, say so to the user and default to the higher of the two candidate tiers — name the tie and your default choice out loud rather than silently picking one.
 
-## 4. Recording the assessment
+## 4. The business case
+
+A tier tells you how much governance a project needs. It says nothing about whether the project is worth building. Ask these once the tier is settled — skip entirely at T0, keep it light at T1, run it in full at T2 and T3.
+
+| Tier | What to capture |
+|---|---|
+| **T0** | Nothing — a throwaway script doesn't need a business case. |
+| **T1** | One line each on B1 and B3 below (why, and roughly how long it took/will take). If it calls any paid API or service, name the monthly cost (B5) even if it's small — "€0" is fine, silence is not. |
+| **T2** | Full business case, B1–B6. |
+| **T3** | Full business case, B1–B6, **and** it must be walked through out loud with the business owner's manager or the relevant governance seat before go-live (see `GOVERNANCE.md`) — a paragraph in `PROJECT.md` is not a substitute for someone with budget authority actually seeing the numbers. |
+
+Ask these in your own words, same conversational style as Section 2:
+
+| # | Ask | Why it matters |
+|---|---|---|
+| B1 | Why does this need to exist — what happens today without it, and why now rather than later? | The first question a skeptical exec asks. If you can't answer it in one sentence, the project isn't ready to build yet. |
+| B2 | What's the expected benefit, and can you put a rough number on it — hours saved per month, error rate reduced, revenue protected, risk avoided? | Ties the project to the same "time saved / efficiency" metric the RPA/utility hub already tracks (Pillar 7 — see `PILLARS_COVERAGE.md`). A project nobody can attach a number to is a signal worth naming, not a paperwork gap to skip past. |
+| B3 | How much effort will it take to build — a rough size (S / M / L / XL) or a days/weeks estimate, and who's doing it? | Sets expectations before anyone commits calendar time, and gives a manager the number they need to actually approve the work. |
+| B4 | Is there a one-time cost — licenses, contractor time, paid tooling to set up? | Separate from the ongoing cost below (B5); often forgotten until an invoice shows up mid-project. |
+| B5 | What will this cost every month once it's running — API/token usage, hosting, subscriptions, any paid service? | This is the number that turns into silent technical debt fastest: nobody notices one €40/month API bill until forty of them exist across the company. Required for T1+ even when the honest answer is "€0" — write the zero down, don't leave the field blank. |
+| B6 | Given B2 through B5, does the benefit clearly outweigh the cost — and if it's a close call, who should decide? | Forces the comparison to actually happen once, on paper, instead of being silently assumed. A close call routes to the business owner's manager or a governance seat, not to a shrug. |
+
+If the honest answer to B1 is "I'm not sure yet, I just wanted to try it" — that's a legitimate answer at T0/T1, but say so plainly in the `PROJECT.md` record rather than backfilling a justification after the fact. A small experiment is allowed to not have a business case yet; a T2/T3 project that gets shared, scheduled, and relied on is not.
+
+## 5. Recording the assessment
 
 Before scaffolding anything, create or append this block to the project's `PROJECT.md`:
 
@@ -65,13 +90,23 @@ Before scaffolding anything, create or append this block to the project's `PROJE
   - Integration / shared data / operational reliance: <summary>
   - Regulated data / customer-facing / autonomous action / impact: <summary>
 - Rationale: <one or two sentences on why this tier>
+
+## Business Case
+<omit this whole block at T0>
+- Why now: <B1>
+- Expected benefit: <B2 — quantify if at all possible; write "not quantified" rather than leaving it blank>
+- Effort estimate: <B3 — size (S/M/L/XL) or a days/weeks figure, and who is building it>
+- One-time cost: <B4 — amount, or "none">
+- Monthly recurring cost: <B5 — amount, or "€0">
+- Cost/benefit call: <B6 — "benefit clearly outweighs cost" / "close call — escalated to <name>" / "not assessed — Tier 0/1 experiment">
+- Presented for sign-off: <T3 only — who it was walked through with, and when; leave "N/A" below T3>
 ```
 
 Recording the kit version matters as much as the tier: if the kit's requirements change later, an audit needs to check the project against the rules that were actually in force, not today's version. If you cloned the repository, the tag is `git describe --tags`; if the user handed you loose files, ask them which version they got, or note "unknown — files provided directly."
 
-This block is the first thing an auditor reads later — it shows the tier was reasoned, not guessed, and gives a re-assessment something concrete to compare against.
+This block is the first thing an auditor reads later — it shows the tier was reasoned, not guessed, and gives a re-assessment something concrete to compare against. The Business Case section is what a manager or the governance council reads when they're asked to approve or continue funding the project — keep it current, not just accurate on the day it was written.
 
-## 5. After classification — hand off to the matching starter
+## 6. After classification — hand off to the matching starter
 
 | Tier | Open this file |
 |---|---|
@@ -80,4 +115,8 @@ This block is the first thing an auditor reads later — it shows the tier was r
 | T2 | `PROJECT_STARTER_T2_STANDARD.md` |
 | T3 | `PROJECT_STARTER_T3_CRITICAL.md` (and read `AI_PROJECT_STRUCTURE.md` in full, plus `reference/AI_Development_Standard.docx` Sections 4–5) |
 
-Continue the conversation inside that file's structure — you already have the problem statement and owner from this interview; don't re-ask for them.
+Continue the conversation inside that file's structure — you already have the problem statement, owner, and business case from this interview; don't re-ask for them.
+
+At T1+, also create `OWNERSHIP_TRANSFER.md` from `OWNERSHIP_TRANSFER_TEMPLATE.md` in the project root, pre-filled with the owner and scope you already have — it's a living document kept current as the project evolves, not a form filled in once and forgotten. Its entire point is that the project survives its current owner leaving; a stale one is barely better than none.
+
+At T3, do not treat the business case as filed-and-forgotten once it's in `PROJECT.md`: it must actually be walked through with the business owner's manager or the relevant governance seat before go-live (Section 4), the same way the security sign-off is a real approval and not a checkbox.

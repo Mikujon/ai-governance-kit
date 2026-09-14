@@ -25,13 +25,13 @@ This kit exists to answer one original brief in a way that scales to every proje
 ## 4. A scope of the tool and the problem it resolves
 
 - **Defined:** every starter's Section 1 is a problem-statement template, scaled by tier — one line at T0/T1, full in-scope/out-of-scope/success-metric at T2/T3. `reference/AI_Development_Standard.docx` Appendix C is the full problem-statement template for Tier 3.
-- **Enforced:** `AI_INTAKE_ASSESSMENT.md` collects this *during the classification interview itself*, so it exists before a line of code is written, and the assistant pre-fills the starter's Section 1 from the interview rather than asking twice.
+- **Enforced:** `AI_INTAKE_ASSESSMENT.md` collects this *during the classification interview itself*, so it exists before a line of code is written, and the assistant pre-fills the starter's Section 1 from the interview rather than asking twice. The same interview (Section 4) immediately follows scope with the business case — why the project needs to exist, expected benefit, effort, and cost — so scope and justification are captured in one sitting, not two.
 - **Visible:** the Governance Hub's "Scope" field is the same text, one field, one source of truth — not a document that drifts from what the Hub says.
 
 ## 5. An owner, for future development, features, or switching the tool off
 
 - **Defined:** Requirements matrix row "Named owner" (from T1) and "business **and** technical owner" (T2+). `AI_PROJECT_GUIDELINES.md` Section 4 "Ownership", including a 5-business-day transfer SLA on a role change or departure.
-- **Enforced:** every starter from T1 up has an explicit owner field in its problem statement, and `AI_INTAKE_ASSESSMENT.md` Section 4's classification record now includes an `Owner` line (see below) so it's recorded at classification time, not left to be filled in later and forgotten.
+- **Enforced:** every starter from T1 up has an explicit owner field in its problem statement, and `AI_INTAKE_ASSESSMENT.md` Section 5's classification record includes an `Owner` line so it's recorded at classification time, not left to be filled in later and forgotten. From T1 up, every project also carries its own `OWNERSHIP_TRANSFER.md` (`OWNERSHIP_TRANSFER_TEMPLATE.md`) — access checklist, current status, pending work, and cost commitments — kept current as a living document, not written once and left to rot. This is what actually makes the 5-business-day transfer SLA achievable instead of aspirational: the SLA is a deadline, the transfer file is what lets someone hit it.
 - **Visible:** the Governance Hub's "Ownership" panel shows business + technical owner per tool — this is exactly the field a manager checks when someone leaves, before a tool is left ownerless.
 
 ## 6. An automatic reminder for the tool to be checked for cyber and utility
@@ -43,7 +43,7 @@ This kit exists to answer one original brief in a way that scales to every proje
 ## 7. Inclusion on the automatic utility/RPA hub, to understand utilization and savings
 
 - **Defined:** Requirements matrix rows "Registered in the AI Tools Governance Hub" and "Registered in the RPA / utility hub" (both from T2). `AI_PROJECT_GUIDELINES.md` Section 4 "Central visibility".
-- **Enforced:** T2/T3 starters both list Hub + RPA/utility-hub registration as a go-live requirement, and T3 keeps the savings/usage figures refreshed at least quarterly.
+- **Enforced:** T2/T3 starters both list Hub + RPA/utility-hub registration as a go-live requirement, and T3 keeps the savings/usage figures refreshed at least quarterly. The estimated-savings figure itself isn't invented at registration time — it's the same "expected benefit" (B2) and "monthly recurring cost" (B5) numbers already captured in the business case (`AI_INTAKE_ASSESSMENT.md` Section 4, `PROJECT.md`'s `## Business Case`), carried forward rather than re-estimated from scratch.
 - **Visible:** the Governance Hub's "RPA / utility hub" panel is a single yes/no plus an estimated-savings field per tool — deliberately simple, so it rolls up next to actual RPA-platform tools even when the automation itself was never built on that platform (a Python script, a Sheets macro, a Power Automate flow — see "This also covers…" in `00_START_HERE.md`).
 
 ---

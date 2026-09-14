@@ -20,6 +20,8 @@ jobs:
             "PROJECT_STARTER_T1_BASIC.md"
             "PROJECT_STARTER_T2_STANDARD.md"
             "PROJECT_STARTER_T3_CRITICAL.md"
+            "OWNERSHIP_TRANSFER_TEMPLATE.md"
+            ".claude/skills/start-ai-project/SKILL.md"
             "AI_PROJECT_GUIDELINES.md"
             "AI_PROJECT_STRUCTURE.md"
             "PILLARS_COVERAGE.md"

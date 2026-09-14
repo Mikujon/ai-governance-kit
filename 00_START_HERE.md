@@ -4,7 +4,7 @@ This is the index for the AI project-governance document set, maintained at `wea
 
 ## Why this exists
 
-Every internally-built AI tool or automation is a small liability if nobody but its author understands it: when that person changes teams or leaves, the tool either breaks silently, keeps running with nobody watching its security or its cost, or gets rebuilt from scratch by someone else who didn't know it already existed. This kit exists so that never has to happen — every tool gets a named owner, a written scope, a security check sized to its actual risk, and a place other people can find it — scaled so a five-minute script isn't held to the same bar as something touching customer data. `PILLARS_COVERAGE.md` shows exactly how each of the seven founding requirements behind this kit is met, file by file.
+Every internally-built AI tool or automation is a small liability if nobody but its author understands it: when that person changes teams or leaves, the tool either breaks silently, keeps running with nobody watching its security or its cost, or gets rebuilt from scratch by someone else who didn't know it already existed. This kit exists so that never has to happen — every tool gets a named owner (with a living transfer document, not just a name in a field), a written scope backed by an actual business case (why it exists, what it costs every month, what it's worth), a security check sized to its actual risk, and a place other people can find it — scaled so a five-minute script isn't held to the same bar as something touching customer data. `PILLARS_COVERAGE.md` shows exactly how each of the seven founding requirements behind this kit is met, file by file.
 
 ## This covers more than "AI projects"
 
@@ -25,20 +25,21 @@ If you're building something and thinking "this is just a script, it doesn't nee
 If your AI assistant has git or network access, don't attach these files by hand — have it read them directly from the repository at a pinned version:
 
 ```bash
-git clone --branch v1.3.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.4.0 https://github.com/wearefiber/ai-governance-kit.git
 ```
 
 Or fetch a single file without cloning (useful inside a prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.3.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.4.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 Always reference a version tag (e.g. `v1.1.0`), not `main` — record that tag in the project's `PROJECT.md` (Section 4 of `AI_INTAKE_ASSESSMENT.md`) so an audit later knows exactly which rules were in force when the project was built, even if the kit has changed since. See `CHANGELOG.md` in the repository for what changed between versions.
 
 There are two ways to use the kit — pick one:
 
-- **Option A — let the AI run the assessment (recommended).** Give your AI assistant **`AI_INTAKE_ASSESSMENT.md`** together with the four `PROJECT_STARTER_*.md` files and say you want to build something. The assistant interviews you, decides the tier itself, records why, and continues straight into the matching starter — you don't have to self-classify or hand it a second file.
+- **Option A — let the AI run the assessment (recommended).** Give your AI assistant **`AI_INTAKE_ASSESSMENT.md`** together with the four `PROJECT_STARTER_*.md` files and say you want to build something. The assistant interviews you, decides the tier itself, records why, runs the business case (Section 4 of that file), and continues straight into the matching starter — you don't have to self-classify or hand it a second file.
+- **Option A, fully automatic (Claude Code).** If you're on Claude Code, install this kit's `.claude/skills/start-ai-project/` folder into your own project (see the skill's own "Installing this skill" section) and just run `/start-ai-project` — it *is* Option A, wired up as one command instead of a prompt you have to remember to paste. No files to attach by hand.
 - **Option B — classify it yourself.** Answer the questions below, pick the matching starter, and hand your assistant **only that one file**.
 
 ## Option B — self-classification
@@ -91,6 +92,8 @@ When it's time to check a project is compliant, open its starter file (and, for 
 | `PROJECT_STARTER_T1_BASIC.md` | Starter kit for small internal tools with a handful of users. |
 | `PROJECT_STARTER_T2_STANDARD.md` | Starter kit for departmental tools that integrate with other systems/data. |
 | `PROJECT_STARTER_T3_CRITICAL.md` | Starter kit for tools touching regulated data, customers, or autonomous actions. |
+| `OWNERSHIP_TRANSFER_TEMPLATE.md` | Living handoff document (from T1) — access checklist, status, pending work, cost commitments — so a project survives its current owner leaving. |
+| `.claude/skills/start-ai-project/` | A Claude Code skill that runs this whole page's Option A flow — interview, tier, business case, starter, ownership transfer — from a single `/start-ai-project` command. |
 | `AI_PROJECT_GUIDELINES.md` | The full tiering model and requirements matrix behind these starters (reference only). |
 | `AI_PROJECT_STRUCTURE.md` | The full technical standard behind these starters — stack, ReBAC, data, design, CI/CD (reference only). |
 | `reference/AI_Development_Standard.docx` | The complete governance policy and 42-point audit checklist for Tier 3. |

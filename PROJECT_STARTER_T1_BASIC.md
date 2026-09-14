@@ -12,6 +12,9 @@
 > ______________________________________________
 >
 > **Owner:** ______________________ (one person, accountable even if they're also the builder)
+>
+> **Why now (business case, light):** ______________________________________________
+> **Monthly recurring cost** (API/hosting/subscription — write "€0" if none): ______________________________________________
 
 ## 2. Structure
 
@@ -19,6 +22,7 @@
 project-root/
 ├── README.md            # what it is, how to run it, who owns it
 ├── PROJECT.md            # the problem statement above
+├── OWNERSHIP_TRANSFER.md # recommended — from OWNERSHIP_TRANSFER_TEMPLATE.md
 ├── .env.example
 ├── src/
 └── tests/
@@ -34,6 +38,7 @@ project-root/
 
 **Ownership**
 - [ ] A named owner is written down in `PROJECT.md` (Section 1) — even if it's the author.
+- [ ] `OWNERSHIP_TRANSFER.md` created from `OWNERSHIP_TRANSFER_TEMPLATE.md` (recommended at this tier — cheaper to do now than to reconstruct after someone's left).
 
 **Security**
 - [ ] No secret is hardcoded — use `.env` (git-ignored) locally; use the company vault if this ever runs in a shared environment.
@@ -52,11 +57,13 @@ project-root/
 | # | Requirement | Status (Pass/Fail/N-A) | Evidence |
 |---|---|---|---|
 | 1 | Problem statement & owner written | | |
-| 2 | No hardcoded secrets | | |
-| 3 | Sensitive-data classification checked | | |
-| 4 | SSO used for any login | | |
-| 5 | Dependencies pinned | | |
-| 6 | README complete | | |
+| 2 | Business case (light): why + monthly cost named | | |
+| 3 | `OWNERSHIP_TRANSFER.md` created | | |
+| 4 | No hardcoded secrets | | |
+| 5 | Sensitive-data classification checked | | |
+| 6 | SSO used for any login | | |
+| 7 | Dependencies pinned | | |
+| 8 | README complete | | |
 
 **Audited by:** ________________  **Date:** ________________
 

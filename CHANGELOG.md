@@ -2,6 +2,23 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.4.0] — 2026-09-14
+
+### Aggiunto
+- `AI_INTAKE_ASSESSMENT.md` — nuova Sezione 4 "The business case": sei domande (B1–B6) su perché il progetto serve, beneficio atteso, effort di sviluppo, costo una tantum, **costo ricorrente mensile** e il confronto costo/beneficio — scalate per tier (assente a T0, leggera a T1, completa a T2/T3). A T3 il business case deve essere presentato a voce al manager del business owner o al seat di governance competente prima del go-live, non solo scritto in `PROJECT.md`. Il blocco `## Business Case` è stato aggiunto al record di classificazione (ora Sezione 5).
+- `OWNERSHIP_TRANSFER_TEMPLATE.md` — nuovo file: documento di passaggio vivo (checklist accessi, stato corrente, lavoro in sospeso, contatti chiave, impegni di costo, log dei passaggi), obbligatorio da T2 (raccomandato a T1). Risponde direttamente al punto debole "le persone non sono eterne": rende operativa la SLA di 5 giorni lavorativi già esistente, invece di lasciarla come una regola scritta senza uno strumento per rispettarla.
+- `.claude/skills/start-ai-project/SKILL.md` — skill Claude Code che esegue l'intero flusso di intake (intervista → tier → business case → starter → ownership transfer) con un solo comando (`/start-ai-project`), invece di dover allegare i file e incollare il prompt "Option A" a mano. Documentato come "Option A, fully automatic" in `00_START_HERE.md`.
+
+### Modificato
+- `AI_PROJECT_GUIDELINES.md` — nuove righe nella matrice dei requisiti (Sezione 3): business case, business case presentato per il sign-off, `OWNERSHIP_TRANSFER.md` mantenuto aggiornato. Nuova sotto-sezione "Business case & cost/benefit" in Sezione 4; sezione "Ownership" estesa con il riferimento al nuovo template.
+- `PROJECT_STARTER_T1_BASIC.md`, `PROJECT_STARTER_T2_STANDARD.md`, `PROJECT_STARTER_T3_CRITICAL.md` — aggiunti i campi di business case alla Sezione 1 (leggeri a T1, completi a T2/T3), un requisito su `OWNERSHIP_TRANSFER.md`, e le relative righe nella checklist di conformità. A T3, business case e ownership transfer sono aggiunti ai gate item "Before go-live" e alla matrice RACI.
+- `PILLARS_COVERAGE.md` — Pilastro 4 (scope), Pilastro 5 (owner) e Pilastro 7 (hub/risparmi) aggiornati per citare i nuovi meccanismi di enforcement (business case nella stessa intervista dello scope; `OWNERSHIP_TRANSFER.md` come ciò che rende raggiungibile la SLA di 5 giorni; le cifre B2/B5 del business case come fonte del campo "risparmi stimati" dell'hub, invece di una ri-stima separata).
+- `00_START_HERE.md`, `README.md` — documentata la nuova modalità "Option A, fully automatic" (skill Claude Code), aggiunte le righe per `OWNERSHIP_TRANSFER_TEMPLATE.md` e per lo skill nella tabella dei file; comandi di clone e URL raw aggiornati a `v1.4.0`.
+- `.github/workflows/validate-kit.yml` — `OWNERSHIP_TRANSFER_TEMPLATE.md` e `.claude/skills/start-ai-project/SKILL.md` aggiunti ai file richiesti.
+
+### Perché ora
+Il kit copriva già "come" classificare un progetto e "chi" lo approva, ma non "perché costruirlo", "quanto costa ogni mese" e "cosa succede quando chi lo possiede cambia lavoro" — tre lacune che, lasciate aperte, producono esattamente il punto cieco che questo kit esiste per prevenire (vedi `00_START_HERE.md`, "Why this exists"). Lo skill Claude Code chiude anche il divario tra "il processo è documentato" e "il processo parte da solo quando qualcuno lo invoca".
+
 ## [1.3.1] — 2026-09-14
 
 ### Corretto
