@@ -24,8 +24,9 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 | `AI_PROJECT_STRUCTURE.md` | Standard tecnico: stack, ReBAC, dati, design, CI/CD. |
 | `reference/AI_Development_Standard.docx` | Policy completa e checklist di audit a 42 punti (Tier 3). |
 | `reference/Guida_Uso_Kit_Governance_AI.docx` | Guida utente passo-passo. |
-| `PILLARS_COVERAGE.md` | Mappa dei 7 requisiti fondativi → dove ciascuno è definito, applicato e tracciato. |
+| `PILLARS_COVERAGE.md` | Mappa dei 7 requisiti fondativi → dove ciascuno è definito, applicato e tracciato. Include anche il crosswalk verso NIST AI RMF / EU AI Act / ISO 42001 (Sezione 8). |
 | `AI_ASSISTANT_USAGE_GUIDE.md` | Come usare Claude Code / Codex CLI: installazione, modalità, come contenere i costi in token, e cosa non deve mai poter toccare. |
+| `GOVERNANCE.md` | Chi decide: il consiglio di governance (4 posti), cosa richiede l'approvazione di chi, e cosa succede se il Governance Administrator non è disponibile. |
 
 ## Clonare da un'AI o da CI (nessuna copia locale necessaria)
 
@@ -47,7 +48,7 @@ Questo repository segue [Semantic Versioning](https://semver.org/lang/it/) trami
 
 ## Proporre una modifica
 
-Vedi [`CONTRIBUTING.md`](./CONTRIBUTING.md). Ogni modifica ai file del kit richiede la revisione del Governance Administrator (vedi `.github/CODEOWNERS`).
+Vedi [`CONTRIBUTING.md`](./CONTRIBUTING.md). Ogni modifica ai file del kit richiede la revisione del Governance Administrator (vedi `.github/CODEOWNERS`) — il ruolo e il resto del consiglio di governance sono definiti in [`GOVERNANCE.md`](./GOVERNANCE.md).
 
 ## Proprietà
 

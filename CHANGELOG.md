@@ -2,6 +2,22 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [Unreleased]
+
+### Aggiunto
+- `GOVERNANCE.md` — il consiglio di governance a 4 posti (Chair/Governance Administrator, Security/Cyber, Legal/Privacy, seat rotante di engineering), cosa richiede l'approvazione di chi, il piano di continuità se il Chair non è disponibile (SLA 5 giorni lavorativi, allineato a quello già usato per il trasferimento di ownership), la cadenza trimestrale, e il percorso di escalation. Risolve il single-point-of-failure della governance (un solo indirizzo in `CODEOWNERS`).
+- `PILLARS_COVERAGE.md` — nuova Sezione 8, "Framework crosswalk": tabella che mappa T0–T3 verso le funzioni di NIST AI RMF (Govern/Map/Measure/Manage), le classi di rischio dell'EU AI Act, e la pertinenza rispetto a ISO/IEC 42001. Mapping indicativo, non una classificazione legale — vedi la nota a piè di tabella.
+
+### Modificato
+- `PILLARS_COVERAGE.md` — sostituito il riferimento abbreviato "§N" con "Section N" in tutto il file, per leggibilità da parte di chi non è tecnico.
+- `README.md`, `00_START_HERE.md` — aggiunta `GOVERNANCE.md` alla tabella dei file del kit.
+- `.github/workflows/validate-kit.yml` — `GOVERNANCE.md` aggiunto ai file richiesti.
+- `.github/CODEOWNERS` — aggiunto un commento che rimanda a `GOVERNANCE.md` per il resto del consiglio.
+
+### Da fare
+- Assegnare i due seat ancora `TBD` in `GOVERNANCE.md` (Security/Cyber, Legal/Privacy) — non bloccante per il lavoro Tier 0–2, ma necessario prima che il primo progetto Tier 3 debba chiudere.
+- Questa è una modifica sostanziale (nuovo file di governance, nuova sezione nella matrice di tracciabilità) — taggare una nuova **minor version** (`v1.3.0`) al merge, come da `CONTRIBUTING.md`.
+
 ## [1.2.0] — 2026-09-13
 
 ### Aggiunto
