@@ -17,6 +17,7 @@ Su Claude Code, `.claude/skills/start-ai-project/` rende l'intero flusso — int
 | File | Cosa contiene |
 |---|---|
 | `00_START_HERE.md` | Indice e punto di partenza. |
+| `PROCESS_FLOW.md` | L'intero kit in quattro diagrammi di flusso: intake, gate di build per tier, il ciclo di revisione/passaggio dopo il go-live, e il percorso di escalation della governance. |
 | `AI_INTAKE_ASSESSMENT.md` | Script per l'AI: come intervistare l'utente e assegnare il tier. |
 | `PROJECT_STARTER_T0_PERSONAL.md` | Starter per script/report personali, usa-e-getta. |
 | `PROJECT_STARTER_T1_BASIC.md` | Starter per piccoli strumenti interni. |
