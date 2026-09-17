@@ -5,7 +5,9 @@ Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [K
 ## [1.4.0] — 2026-09-17
 
 ### Aggiunto
-- `AI_PROJECT_AUDIT.md` — copre il vuoto lasciato da `AI_INTAKE_ASSESSMENT.md`, che serve solo per progetti **nuovi**: dà all'assistente AI lo script per auditare uno strumento **già esistente** — conferma o ri-deriva il tier, applica la checklist corretta (matrice T0–T2, checklist a 42 punti per T3, mai una versione abbreviata), chiede evidenza per ogni voce invece di accettare "dovrebbe andare bene", e produce un documento di audit scritto con un template dedicato (Sezione 3). Include un percorso di escalation esplicito al consiglio di governance se un audit T3 fallisce una gate item (Sezione 4).
+- `AI_PROJECT_AUDIT.md` — copre il vuoto lasciato da `AI_INTAKE_ASSESSMENT.md`, che serve solo per progetti **nuovi**: dà all'assistente AI lo script per auditare uno strumento **già esistente** — conferma o ri-deriva il tier, applica la checklist corretta (matrice T0–T2, checklist a 42 punti per T3, mai una versione abbreviata), chiede evidenza per ogni voce invece di accettare "dovrebbe andare bene", e produce un documento di audit scritto con un template dedicato (Sezione 3). Include un percorso di escalation esplicito al consiglio di governance se un audit T3 fallisce una gate item (Sezione 6).
+- `AI_PROJECT_AUDIT.md` Sezione 4 — chi riceve il report di audit, scalato per tier e ancorato ai seat già definiti in `GOVERNANCE.md` (solo l'owner a T0/T1, owner + Chair a T2, l'intero consiglio a T3) invece di un elenco fisso di destinatari.
+- `AI_PROJECT_AUDIT.md` Sezione 5 — il prompt di remediation: un secondo file, separato dal report, con solo i punti in Fail come checklist spuntabile, pensato per essere dato direttamente a un assistente AI per chiudere i gap.
 - `00_START_HERE.md` — nuova "Opzione C — audit di uno strumento esistente", con il prompt pronto da usare.
 
 ### Modificato
