@@ -2,6 +2,11 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.6.0] — 2026-09-17
+
+### Modificato
+- `AI_PROJECT_AUDIT.md` Sezione 2, punto 5 — la verifica della checklist ora cerca l'evidenza da sola per prima (nel repository, in `SECURITY.md`/`PROJECT.md`, nelle config, nell'Hub) e porta all'utente un riscontro da confermare, invece di aprire con una domanda a freddo che presume l'utente tenga a mente lo stato di conformità. Si chiede direttamente solo ciò che non è ispezionabile (un'approvazione via email, una decisione presa a voce). Distingue esplicitamente questa regola dal gate della Sezione 1 punto 2 (la classificazione del tier resta un giudizio organizzativo che va sempre chiesto dal vivo, mai dedotto).
+
 ## [1.5.0] — 2026-09-17
 
 ### Aggiunto
