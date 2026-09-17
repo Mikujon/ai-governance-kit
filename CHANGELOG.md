@@ -2,6 +2,20 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.5.0] — 2026-09-17
+
+### Aggiunto
+- `AI_PROJECT_AUDIT.md` Sezione 1 — tre condizioni non negoziabili prima di iniziare un audit, emerse da un test reale dove l'assistente ha dedotto le risposte dal codice invece di chiederle, e ha finito per fare commit/PR dentro il repository controllato:
+  1. serve qualcuno che può davvero rispondere (l'owner o un seat `GOVERNANCE.md`, non un contributor di codice) — altrimenti ci si ferma;
+  2. si intervista prima, si ispeziona il codice dopo — mai il contrario;
+  3. il codice è un controllo incrociato sulle risposte, non la fonte primaria — una contraddizione va segnalata e risolta, non media, e in caso di dubbio si classifica per eccesso;
+  4. non si scrive mai nel repository del progetto auditato — nessun commit, branch, o PR lì. Il kit governa un progetto, non ne diventa parte.
+- Se una di queste condizioni non è rispettabile, l'assistente si ferma e lo dice — non esegue una versione ridotta dell'audit.
+
+### Modificato
+- `00_START_HERE.md` — il prompt dell'Opzione C ora chiede a chi lo usa di dichiararsi come owner fin dall'inizio, e richiama esplicitamente le nuove regole.
+- `AI_PROJECT_AUDIT.md` — rinumerate le sezioni successive (2&ndash;8) per fare spazio alla nuova Sezione 1; riferimenti incrociati corretti di conseguenza.
+
 ## [1.4.0] — 2026-09-17
 
 ### Aggiunto
