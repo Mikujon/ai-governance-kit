@@ -25,21 +25,22 @@ If you're building something and thinking "this is just a script, it doesn't nee
 If your AI assistant has git or network access, don't attach these files by hand — have it read them directly from the repository at a pinned version:
 
 ```bash
-git clone --branch v1.3.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.4.0 https://github.com/wearefiber/ai-governance-kit.git
 ```
 
 Or fetch a single file without cloning (useful inside a prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.3.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.4.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 Always reference a version tag (e.g. `v1.1.0`), not `main` — record that tag in the project's `PROJECT.md` (Section 4 of `AI_INTAKE_ASSESSMENT.md`) so an audit later knows exactly which rules were in force when the project was built, even if the kit has changed since. See `CHANGELOG.md` in the repository for what changed between versions.
 
-There are two ways to use the kit — pick one:
+There are three ways to use the kit — pick one:
 
 - **Option A — let the AI run the assessment (recommended).** Give your AI assistant **`AI_INTAKE_ASSESSMENT.md`** together with the four `PROJECT_STARTER_*.md` files and say you want to build something. The assistant interviews you, decides the tier itself, records why, and continues straight into the matching starter — you don't have to self-classify or hand it a second file.
 - **Option B — classify it yourself.** Answer the questions below, pick the matching starter, and hand your assistant **only that one file**.
+- **Option C — audit something that already exists.** Not building anything new — you want to check a tool that's already running. Use **`AI_PROJECT_AUDIT.md`** instead of the intake assessment; see "Later — the audit" below.
 
 ## Option B — self-classification
 
@@ -75,11 +76,15 @@ If it's a close call, pick the heavier tier — it's cheaper to lightly over-doc
 
 > "Use this file as the project structure and requirements. Build [describe what you need]."
 
-Either way, the assistant scaffolds the repository, applies the listed requirements, and fills in the problem statement and sign-off blocks with you as it works.
+**Option C prompt** (auditing something that already exists):
+
+> "Here are our AI project governance documents. Run the audit in `AI_PROJECT_AUDIT.md` against [name/describe the existing tool] — confirm its tier, walk the checklist, and produce the audit document."
+
+Either way (A or B), the assistant scaffolds the repository, applies the listed requirements, and fills in the problem statement and sign-off blocks with you as it works. For C, it produces a written audit report instead — see below.
 
 ## Later — the audit
 
-When it's time to check a project is compliant, open its starter file (and, for Option A, the `## Project Classification` block it recorded in `PROJECT.md`): the starter's **Compliance checklist** section is the audit instrument. For Tier 3 projects, the full 42-point checklist lives in **`reference/AI_Development_Standard.docx`** — use that instead of the short version. Check the project's recorded kit version against `CHANGELOG.md` first — audit against the rules that were live when the project was built, not necessarily today's.
+This is what `AI_PROJECT_AUDIT.md` (Option C, above) is for — don't just open a starter's checklist and eyeball it yourself. Give your AI assistant that file and ask it to run the audit: it confirms (or re-derives) the tier, walks the correct checklist for that tier — the starter's **Compliance checklist** for T0–T2, the full 42-point checklist in **`reference/AI_Development_Standard.docx`** for T3, never a shortened version — and produces a written audit document with evidence per item, not a verbal impression. It also checks the project's recorded kit version first (`AI_INTAKE_ASSESSMENT.md` Section 4, cross-referenced against `CHANGELOG.md`) so the audit is against the rules that were actually live when the project was built, unless you specifically ask it to check against today's kit instead.
 
 ## The full document set
 
@@ -87,6 +92,7 @@ When it's time to check a project is compliant, open its starter file (and, for 
 |---|---|
 | `00_START_HERE.md` | This index. |
 | `AI_INTAKE_ASSESSMENT.md` | Gives the AI assistant a script to interview the user and self-determine the tier (Option A). |
+| `AI_PROJECT_AUDIT.md` | Gives the AI assistant a script to audit a tool that already exists (Option C) — confirm/re-derive the tier, walk the right checklist, produce a written audit document. |
 | `PROJECT_STARTER_T0_PERSONAL.md` | Starter kit for personal / throwaway scripts and reports. |
 | `PROJECT_STARTER_T1_BASIC.md` | Starter kit for small internal tools with a handful of users. |
 | `PROJECT_STARTER_T2_STANDARD.md` | Starter kit for departmental tools that integrate with other systems/data. |
