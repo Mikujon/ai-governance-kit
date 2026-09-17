@@ -2,6 +2,19 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.7.0] — 2026-09-17
+
+Revisione complessiva di `AI_PROJECT_AUDIT.md` per allinearlo a come lavora davvero una società di audit esterna, non solo alle patch emerse dai test — l'obiettivo resta classificare e tenere aggiornati tutti gli strumenti AI dell'azienda, non produrre singoli documenti isolati.
+
+### Aggiunto
+- **Sezione 1, punto 5 — indipendenza.** Se chi audita ha costruito o mantiene lo strumento, il risultato è un'autovalutazione, non un audit indipendente, e il report deve dirlo esplicitamente. Non chiude da solo la conformità a T2/T3 — serve comunque il sign-off del Chair (T2) o della revisione indipendente del seat Security (T3).
+- **Sezione 2, punto 7 — diritto di replica dell'owner.** Prima di finalizzare il report, ogni Fail va proposto all'owner perché lo confermi, lo contesti con una motivazione, o si impegni su una data di remediation — la sua risposta entra nel report finale, non è un verdetto a senso unico.
+- **Sezione 2, punto 11 — registrazione obbligatoria nell'Hub.** Un audit che non viene registrato non conta ai fini della visibilità aziendale su cosa è stato classificato — non è un passaggio opzionale.
+- **Sezione 2, punto 13 — strumenti scoperti per caso.** Se durante un audit emerge un altro strumento non registrato, va segnalato come finding a sé, mai ignorato o mescolato nell'audit in corso.
+- **Sezione 4 (template) —** nuovi campi: tipo di audit (indipendente/autovalutazione), classificazione di riservatezza del documento, colonna "Risposta owner" per requisito, sezione per strumenti scoperti.
+- **Sezione 5 —** nota esplicita di riservatezza: un report di audit è Confidenziale di default da T2 in su.
+- **Sezione 2, punto 5 —** per i gate item T3, una policy che descrive cosa dovrebbe succedere non è evidenza che sia successo davvero — serve un'approvazione datata e firmata, non un documento generico.
+
 ## [1.6.0] — 2026-09-17
 
 ### Modificato
