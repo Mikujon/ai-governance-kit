@@ -7,7 +7,7 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 ## Come si usa
 
 1. Clona questo repository (vedi [Versioning](#versioning) per come puntare a una versione precisa).
-2. Apri **[`00_START_HERE.md`](./00_START_HERE.md)** — spiega le due modalità disponibili (intervista guidata dall'AI, o autoclassificazione) e quale file usare.
+2. Apri **[`00_START_HERE.md`](./00_START_HERE.md)** — spiega le tre modalità disponibili (intervista guidata dall'AI, autoclassificazione, o audit di uno strumento già esistente) e quale file usare.
 3. Segui la guida passo-passo completa in **[`reference/Guida_Uso_Kit_Governance_AI.docx`](./reference/Guida_Uso_Kit_Governance_AI.docx)**.
 
 ## Contenuto
@@ -15,7 +15,8 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 | File | Cosa contiene |
 |---|---|
 | `00_START_HERE.md` | Indice e punto di partenza. |
-| `AI_INTAKE_ASSESSMENT.md` | Script per l'AI: come intervistare l'utente e assegnare il tier. |
+| `AI_INTAKE_ASSESSMENT.md` | Script per l'AI: come intervistare l'utente e assegnare il tier, per un progetto **nuovo**. |
+| `AI_PROJECT_AUDIT.md` | Script per l'AI: come auditare uno strumento **già esistente** — conferma il tier, applica la checklist giusta, produce un documento di audit scritto. |
 | `PROJECT_STARTER_T0_PERSONAL.md` | Starter per script/report personali, usa-e-getta. |
 | `PROJECT_STARTER_T1_BASIC.md` | Starter per piccoli strumenti interni. |
 | `PROJECT_STARTER_T2_STANDARD.md` | Starter per strumenti dipartimentali/integrati. |
@@ -33,13 +34,13 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 Se il tuo assistente AI ha accesso a git, non serve allegargli i file: fagli clonare direttamente questo repository prima di iniziare l'intervista.
 
 ```bash
-git clone --branch v1.3.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.4.0 https://github.com/wearefiber/ai-governance-kit.git
 ```
 
 Oppure, per leggere un solo file senza clonare (es. dentro un prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.3.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.4.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 ## Versioning
