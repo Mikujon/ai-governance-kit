@@ -5,8 +5,9 @@
 **How to use this file (instructions to the assistant):**
 1. Before writing code, work through [Section 1](#1-classify-the-project) with the user and state the resulting tier and why.
 2. Apply only the requirements listed for that tier in [Section 3](#3-requirements-matrix) and [Section 4](#4-best-practices-by-area) — do not impose a higher tier's requirements on a lower-tier project.
-3. If the project's scope grows mid-build (new data source, new users, new integration), re-run the classification — the tier can go up, never silently down.
-4. At the end of the build, output the applicable rows of Section 3 as a checklist for the user, marked done/not done.
+3. Once the tier is set, check [Section 7](#7-adaptive-deepening--follow-ups-by-tool-type-and-business-area) for tool-type and business-area follow-ups that apply, and fold those into the same interview alongside the fixed ten questions — they deepen the conversation where this specific project actually needs it; they don't replace the fixed questions everyone gets, and they don't move the tier on their own.
+4. If the project's scope grows mid-build (new data source, new users, new integration), re-run the classification — the tier can go up, never silently down.
+5. At the end of the build, output the applicable rows of Section 3 as a checklist for the user, marked done/not done.
 
 ---
 
@@ -137,3 +138,33 @@ Use the same pass/fail structure as the AI Development Standard's checklist (Sec
 When a project sits on the edge (for example, a "basic report" that quietly reads customer data, or a personal script three other people now depend on), classify up, not down, and say so to the user — it's cheaper to lightly over-document a Tier 1 tool than to discover a Tier 3 gap after something goes wrong.
 
 This applies identically to anything built with no-code/low-code tools — a Sheets/Apps Script macro, a Power Automate/Zapier/Make flow, an RPA bot. The classification questions in Section 1 don't mention a programming language on purpose: what matters is who relies on it, what it touches, and what it can do on its own, never what it was built with.
+
+---
+
+## 7. Adaptive deepening — follow-ups by tool type and business area
+
+The ten questions in Section 1 decide the tier and stay identical for every project — that's what makes tiers comparable across the company over time, and what stops the interview from bending to fit whoever's answering it. This section is the layer on top: once you know the tier, match the project against every row below that applies (a project can match several) and add those specific questions to the same live interview (`AI_INTAKE_ASSESSMENT.md`) or, during a later audit, the same evidence-gathering pass (`AI_PROJECT_AUDIT.md` Section 2). They add depth where a generic ten-question interview wouldn't reach on its own. They never substitute for the fixed ten, and a match here never moves the tier by itself — it's a prompt to ask more, not a reclassification trigger.
+
+### By tool type
+
+| Signal | What it usually means it touches | Ask about |
+|---|---|---|
+| Uses an LLM / generative AI component | Prompt injection surface, a third-party model provider | Is user or document input ever fed straight into the prompt? What happens if the model is manipulated into ignoring its instructions? What does the model provider do with the data it's sent — residency, retention, training use? |
+| RPA bot / browser automation (Playwright, UiPath, Power Automate desktop, etc.) | Logs in as a real account, acts inside another system's own UI | What account/credentials does it log in as, and what can that account do beyond this one task? If a selector or step breaks silently, does it fail loud or keep going with wrong data? Does it complete send/pay/delete actions unattended, or stop for a human first? |
+| No-code flow (Zapier/Make/Power Automate/Apps Script) | Anyone with edit access can change its behavior without review | Who can edit this flow, and is that access logged or reviewed? What triggers it — a schedule, a webhook, a form — and whose data does that trigger expose to whoever can see the flow's run history? |
+| Data pipeline / ETL / scheduled report | Moves or reshapes data between systems | Trace it start to finish: where does data enter, what transforms happen, where does it land, who or what reads it from there? Is anything dropped or masked before regulated data would otherwise land somewhere broader than its original access scope? |
+| Customer-facing app or chatbot | Its output reaches someone outside the company | What happens when it gives a wrong or harmful answer — is there a human escalation path? How long is a customer's session/conversation data kept, and who can access it? Can the customer tell they're talking to an AI? |
+| Internal assistant with tool/function access (MCP, shell, file, API calls) | Its blast radius is whatever its tools can do, not just what it says | List every tool/function it can call — which of those write, delete, or send rather than just read? Is every call logged with what triggered it? |
+
+### By business area / data domain
+
+| Area | Ask about |
+|---|---|
+| Finance / Payments | Is this in PCI scope? Does moving money ever happen without a second human approving first? How are reconciliation and error-correction handled? |
+| HR / People data | What's the classification of what it touches (salary, performance, health, immigration status)? Is access scoped so someone only sees their own team, not the whole company? Any works-council or legal notice obligation before deploying this? |
+| Sales / CRM | Does it touch marketing-consent status? Is data retention here consistent with the CRM's own policy, or does it create a second copy that outlives the original? |
+| Legal / Compliance | Does it touch privileged or litigation-hold material? Could its output ever be treated as the company's official position? |
+| Customer Support | What can it see of a customer's history, and can it take actions on their account (refund, cancel, change details)? |
+| Engineering / Infra | What production access does it have, and is that scoped to only what this specific task needs? |
+
+If a project matches something not listed here — a new tool type or business area the company starts using — ask the equivalent question yourself (what does this touch, what can go wrong, who'd notice) instead of skipping the deepening step because no row fits exactly, then suggest adding a row here so the next interview or audit doesn't have to improvise the same thing again.

@@ -2,7 +2,7 @@
 
 **When to use this file:** the moment someone tells you they want to build a new AI tool or automation — before you scaffold anything, choose a stack, or pick a starter kit. Don't hand the user a table and ask them to self-classify: run this interview yourself, decide the tier, and tell them what you concluded and why.
 
-This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. See `PILLARS_COVERAGE.md` if you need to justify to the user *why* a question matters — it maps every question back to the founding requirement behind it. Point the user (and yourself, if you're the assistant conducting this interview) at `AI_ASSISTANT_USAGE_GUIDE.md` before scaffolding anything — it covers which permission mode to run in and what you must never be given access to, and applies regardless of the tier this interview lands on. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.3.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
+This file assumes you also have access to `PROJECT_STARTER_T0_PERSONAL.md` through `PROJECT_STARTER_T3_CRITICAL.md`, and `AI_PROJECT_STRUCTURE.md` / `reference/AI_Development_Standard.docx` for Tier 3. See `PILLARS_COVERAGE.md` if you need to justify to the user *why* a question matters — it maps every question back to the founding requirement behind it. Point the user (and yourself, if you're the assistant conducting this interview) at `AI_ASSISTANT_USAGE_GUIDE.md` before scaffolding anything — it covers which permission mode to run in and what you must never be given access to, and applies regardless of the tier this interview lands on. If you have git or network access, clone the full kit rather than asking the user for individual files: `git clone --branch v1.9.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you cloned in Section 4 below. If the user has only given you this file and you cannot reach the repository, ask them for the rest of the kit before scaffolding — this file classifies; the starters build.
 
 ---
 
@@ -14,12 +14,14 @@ Your job in this interview is to actively find the tier that best fits the proje
 
 1. Explain briefly why you're asking: a few questions decide how much process this project needs, so a quick internal script isn't held to the same bar as something touching customer data.
 2. Ask the questions in Section 2 in your own words, in whatever order fits the conversation — group related ones together naturally rather than reading them as a checklist. Use multiple-choice where your tools support it; plain conversation otherwise.
-3. If an answer is vague ("not sure," "maybe," "a bit of both"), ask the one concrete follow-up suggested below instead of accepting it as final — a real answer is almost always available with one more question.
-4. Stop early once a tier is already locked in: if the user has confirmed a Tier 3 trigger, you don't need to keep asking Tier 0/1 questions.
-5. State the resulting tier and a one- or two-sentence reason back to the user, and get their agreement before proceeding — this is a judgment call, and they may know context you don't (a "quick script" that quietly touches customer data, for instance).
-6. Record the assessment (Section 4) in the project's `PROJECT.md` before you scaffold anything.
-7. Open the matching starter file (Section 5) and continue from there, pre-filling its problem-statement fields from what you already learned in the interview — don't make the user repeat themselves.
-8. If the project's scope changes materially while you're building it (a new data source, a new integration, a new user group), re-run the relevant questions and say plainly if the tier changes.
+3. Once you can see roughly which tier this is heading toward, also check `AI_PROJECT_GUIDELINES.md` Section 7 for follow-ups specific to this tool's type and business area, and weave those into the same conversation, live — the same rule as the fixed ten: ask, don't infer from what's already been said. Skipping this because the fixed ten already felt like enough is exactly the shortcut this step exists to close.
+4. If an answer is vague ("not sure," "maybe," "a bit of both") or the user tries to move past a question without really answering it, ask the one concrete follow-up suggested below — don't accept a vague answer as final, and don't let the conversation drift to something else until this question is actually answered. If, after the follow-up, the user still won't give a real answer — refuses, deflects again, says "just put whatever fits" — don't guess on their behalf and don't quietly drop the question: say plainly which one is still open, and apply Section 3's tie-breaking rule (treat it as unresolved, default to the higher of the two candidate tiers, name the default out loud).
+5. Stop early once a tier is already locked in: if the user has confirmed a Tier 3 trigger, you don't need to keep asking Tier 0/1 questions — this shortcut is about the fixed ladder only, it doesn't excuse skipping the Section 7 follow-ups that apply to the tier you landed on.
+6. State the resulting tier and a one- or two-sentence reason back to the user, and get their agreement before proceeding — this is a judgment call, and they may know context you don't (a "quick script" that quietly touches customer data, for instance).
+7. Record the assessment (Section 4) in the project's `PROJECT.md` before you scaffold anything.
+8. Open the matching starter file (Section 5) and continue from there, pre-filling its problem-statement fields from what you already learned in the interview — don't make the user repeat themselves.
+9. If the project's scope changes materially while you're building it (a new data source, a new integration, a new user group), re-run the relevant questions and say plainly if the tier changes.
+10. Once you've started the interview, finish it before moving to anything else the user raises. If they try to change subject or jump ahead ("let's just start building"), acknowledge what they said and come back to what's still unanswered — don't let it quietly replace finishing the interview. If they insist on dropping it entirely, say plainly that no tier can be assigned and nothing gets scaffolded until it is.
 
 ## 2. The interview questions
 
@@ -47,7 +49,7 @@ Apply the highest tier triggered by any answer — never average or split the di
 | Q4, Q5, or Q6 | **T2** |
 | Q7, Q8, Q9, or Q10 | **T3** |
 
-If you're genuinely unsure even after the follow-up, say so to the user and default to the higher of the two candidate tiers — name the tie and your default choice out loud rather than silently picking one.
+If you're genuinely unsure even after the follow-up — or the user won't give you a real answer at all — say so to the user and default to the higher of the two candidate tiers — name the tie and your default choice out loud rather than silently picking one.
 
 ## 4. Recording the assessment
 
