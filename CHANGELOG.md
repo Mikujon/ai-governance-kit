@@ -2,6 +2,17 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.8.0] — 2026-09-21
+
+Estende `AI_PROJECT_AUDIT.md` con un modo di entrare e uscire da un audit senza dover sempre percorrere l'intero flusso, e con un modo di tracciare i gap che non bloccano l'audit ma non vanno persi — richieste emerse riascoltando come viene effettivamente usato oggi.
+
+### Aggiunto
+- **Sezione 9 — comandi diretti.** `audit avvia`, `audit mappa-dati`, `audit stato`, `audit remediation`, `audit registra`: cinque punti d'ingresso con un solo obiettivo dichiarato ciascuno, per non dover sempre ripartire dall'inizio. Quando un comando è attivo, l'assistente resta vincolato al suo obiettivo — niente deviazioni su altri argomenti, niente cambio di comando a metà, niente correzione dei gap trovati nella stessa conversazione (quella resta compito del remediation prompt, Sezione 6).
+- **Sezione 2, punto 14 — mappa dei dati.** Prima di chiudere un audit, l'assistente deve documentare esplicitamente da dove entrano i dati dello strumento, se sono dati cliente/personali/finanziari, dove sono salvati, e quali altri strumenti ne consumano l'output — una riga sui dati senza questa tracciatura è una supposizione, non evidenza.
+- **Stato "Aperto" (Sezione 4 e 10).** Un quarto stato oltre a Pass/Fail/N-A: un requisito realmente non soddisfatto ma che non blocca l'esito di questo audit — tipicamente perché il gap dipende da un altro strumento o un'integrazione mancante, non dallo strumento auditato. Ha una colonna dedicata ("Dipende da") per registrare quella dipendenza, e non può essere usato per ammorbidire un Fail che è davvero colpa dello strumento in esame.
+- **Sezione 10 — punti aperti e promemoria.** Cadenza dei promemoria basata sulla priorità del punto (Alta = ogni mese, Media = ogni due mesi, Bassa = ogni sei mesi — mai annuale), calcolata e registrata nell'Hub alla stessa registrazione dell'audit (Sezione 2, punto 11). Finché l'Hub non invia promemoria da solo, l'assistente deve far riemergere i punti Aperto scaduti a ogni interazione successiva con quello strumento.
+- **Sezione 6 — remediation esteso ai punti Aperto** e meccanismo di destinazione dei task: se Coraly è collegato, i task vanno aperti lì (non solo descritti nel file); il file `.md` resta il fallback finché quella connessione non esiste, o per i task che Coraly non può rappresentare (cambi strutturali/organizzativi, non di codice). Prevista la stessa logica per una futura integrazione diretta (es. un server MCP di Coraly raggiungibile dalla chat).
+
 ## [1.7.0] — 2026-09-17
 
 Revisione complessiva di `AI_PROJECT_AUDIT.md` per allinearlo a come lavora davvero una società di audit esterna, non solo alle patch emerse dai test — l'obiettivo resta classificare e tenere aggiornati tutti gli strumenti AI dell'azienda, non produrre singoli documenti isolati.

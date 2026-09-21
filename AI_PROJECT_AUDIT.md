@@ -2,7 +2,9 @@
 
 **When to use this file:** the moment someone asks you to check, review, or audit an AI tool or automation that **already exists** — not when they want to build something new. If what they're describing hasn't been built yet, stop and use `AI_INTAKE_ASSESSMENT.md` instead; this file assumes there's a real, running thing to look at.
 
-This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.7.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
+This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.8.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
+
+This file also defines a small set of direct commands (Section 9) for running one specific piece of the audit on its own — starting one, mapping data flow, checking open-point status, generating remediation, or registering in the Hub — instead of always walking the full flow below. When one of those commands is invoked, stay strictly inside its stated goal until it's delivered or the user explicitly ends it; don't let the conversation drift to something else mid-command.
 
 ---
 
@@ -35,6 +37,7 @@ Gates 1–4 are stop conditions: if any can't be satisfied, **stop and say so** 
 11. **Register the outcome in the Governance Hub / Automation Hub** — tier, result, auditor (independent or self-assessment), next audit date. This step isn't optional: an audit that isn't registered doesn't count toward knowing which company tools have actually been classified, which is the entire point of running these at all.
 12. **Set the next audit date** before you finish — 12 months out for T2, the next quarter for T3 (`AI_PROJECT_GUIDELINES.md` Section 5).
 13. **If you discovered a different, unrelated tool while auditing this one** — a script it calls, an adjacent automation, anything not already classified — don't fold it into this audit and don't ignore it. Log it as its own finding, tell the user it needs its own classification, and point them to `AI_INTAKE_ASSESSMENT.md` or this file, whichever fits.
+14. **Map the data before you close the audit.** For every requirement that touches data, record explicitly where it enters the tool, whether it's customer, personal, financial, or otherwise regulated data (`AI_PROJECT_GUIDELINES.md`'s data classification scale), where it's stored, and which other systems or tools consume its output. A data-related row with no lineage behind it is a guess, not evidence. Run this on its own with the `audit mappa-dati` command (Section 9) when you only need the data picture, not a full audit.
 
 ## 3. What this is not
 
@@ -59,17 +62,24 @@ Produce this as a real file (e.g. `AUDIT_<data>.md`, kept alongside the project'
 **Audit precedente:** <data, o "nessuno — prima classificazione">
 **Prossimo audit dovuto:** <data, secondo la cadenza del tier confermato>
 
+## Mappa dei dati (Sezione 2, punto 14)
+- Fonte/i: <da dove entrano i dati>
+- Tipo: &#9744; Cliente &nbsp; &#9744; Personale &nbsp; &#9744; Finanziario &nbsp; &#9744; Nessuno dei precedenti
+- Destinazione/i: <dove sono salvati, quali altri strumenti/team consumano l'output>
+
 ## Risultato per requisito
 
-| # | Requisito | Stato | Evidenza | Priorit&agrave; se Fail | Risposta owner |
-|---|---|---|---|---|---|
-| 1 | ... | Pass / Fail / N-A | ... | Alta / Media / Bassa | Concorda / Contesta (motivo) / Remediation entro: ___ |
+| # | Requisito | Stato | Evidenza | Priorit&agrave; (Fail/Aperto) | Dipende da (se Aperto) | Risposta owner |
+|---|---|---|---|---|---|---|
+| 1 | ... | Pass / Fail / Aperto / N-A | ... | Alta / Media / Bassa | ... &mdash; vedi Sezione 10 | Concorda / Contesta (motivo) / Remediation entro: ___ |
+
+**Aperto** = non blocca questo audit, ma resta da chiudere per l'allineamento completo &mdash; tipicamente perch&eacute; dipende da un altro strumento o un'integrazione mancante, non da questo strumento stesso (Sezione 10). Non usarlo per evitare di scrivere Fail su qualcosa che invece dipende solo da questo strumento.
 
 ## Strumenti scoperti durante l'audit (se presenti)
 - <nome> &mdash; non ancora classificato, richiede il proprio audit/intake separato (Sezione 2, punto 13)
 
 ## Sintesi
-&#9744; Certificato &mdash; nessun gap aperto
+&#9744; Certificato &mdash; nessun gap aperto (i punti Aperto non bloccano questo esito, ma restano registrati e con promemoria attivo &mdash; Sezione 10)
 &#9744; Parziale &mdash; remediation entro: ______
 &#9744; Non conforme &mdash; escalation a: ______ (vedi Sezione 7)
 
@@ -95,7 +105,9 @@ If the company gives these people other titles — a CISO, a separate Compliance
 
 ## 6. The remediation prompt
 
-Whenever the audit produces at least one Fail, write a **second file**, separate from the report — meant to be handed directly to an AI assistant (or the owner) to close the gaps, not to be read as a summary.
+Whenever the audit produces at least one Fail, or at least one Aperto item with no remediation date already agreed, write a **second file**, separate from the report — meant to be handed directly to an AI assistant (or the owner) to close the gaps, not to be read as a summary. Keep Fail and Aperto items under separate headings — an Aperto item isn't blocking the audit's result, and the file shouldn't read as if it were.
+
+**Where the tasks actually live.** If Coraly is connected, open each task there instead of only describing it in this file — this file is the fallback for as long as that connection doesn't exist, or for tasks Coraly has no field for (a structural or organizational change, not a code change). If a more direct integration becomes available later (e.g. a Coraly MCP server reachable from this chat), use that the same way — put the task where it actually gets tracked and reminded on, not just where it was convenient to write it down.
 
 ```markdown
 # Remediation &mdash; <nome progetto>
@@ -103,12 +115,16 @@ Whenever the audit produces at least one Fail, write a **second file**, separate
 Basato su: audit del <data>, tier T<0-3>.
 
 Per ogni punto: applica la modifica, poi spunta. Non chiudere un punto
-senza l'evidenza richiesta a fianco.
+senza l'evidenza richiesta a fianco. Dove aperto un task su Coraly,
+riportare qui solo il link/ID &mdash; non duplicare il testo.
 
-## Da correggere
+## Da correggere (Fail &mdash; bloccano l'audit)
 
-- [ ] <requisito in Fail #1> &mdash; <cosa manca esattamente> &mdash; evidenza richiesta: <...>
-- [ ] <requisito in Fail #2> &mdash; ...
+- [ ] <requisito in Fail #1> &mdash; <cosa manca esattamente> &mdash; evidenza richiesta: <...> &mdash; task: <link Coraly o "vedi sotto">
+
+## Punti aperti (Aperto &mdash; non bloccano l'audit, cadenza promemoria in Sezione 10)
+
+- [ ] <requisito Aperto #1> &mdash; dipende da: <strumento/integrazione> &mdash; prossimo promemoria: <data> &mdash; task: <link Coraly o "vedi sotto">
 
 ## Struttura di riferimento
 
@@ -132,3 +148,33 @@ If a Tier 3 audit fails a gate item — security sign-off, penetration test, dat
 This is the tool `00_START_HERE.md`'s "Later — the audit" section points to when someone needs an actual audit run, not just a self-check against a starter's checklist. `AI_INTAKE_ASSESSMENT.md` classifies and builds; this file re-checks and reports. Together they cover a project's whole lifecycle — first classified here, then periodically re-verified here, on the cadence `AI_PROJECT_GUIDELINES.md` Section 5 sets for its tier.
 
 The point of running any of this at all is to end up with **every** AI-built tool in the company classified and current — not a folder of one-off audit documents nobody aggregates. Section 2, point 11's Hub registration is what turns individual audits into that company-wide picture; a real audit run that skips it hasn't finished, whatever the report says.
+
+Section 9 and Section 10, below, give you a way in and out again for one narrow question about a tool already in the system — starting a full audit from scratch isn't the only door.
+
+## 9. Direct commands
+
+Use these when you don't need — or haven't been asked for — the full walk from Section 1 through Section 2. Each command has exactly one goal, stated below it. Once one is invoked, stay inside that goal until its output is delivered or the user explicitly cancels it: don't answer unrelated questions mid-command, don't switch to a different command halfway through, and don't let a finding pull you into fixing it there and then — fixing gaps is the remediation prompt's job (Section 6), a separate deliverable, never something this file does inline (Section 3). If a message doesn't match any of these, fall back to Section 2's numbered flow.
+
+- **`audit avvia <strumento>`** &mdash; run the full audit: Section 1's gates, then Section 2 steps 1&ndash;14, end to end.
+- **`audit mappa-dati <strumento>`** &mdash; only Section 2, point 14: where the tool's data comes from, whether it's customer/personal/financial, where it's stored, what consumes its output. Produces the "Mappa dei dati" block from Section 4 on its own, not a full report — useful before deciding whether a full audit is even needed yet.
+- **`audit stato <strumento>`** &mdash; look up this tool's Hub registration and report its confirmed tier, last audit date, and every Aperto item still outstanding with its next reminder date (Section 10). Doesn't re-run any checklist.
+- **`audit remediation <strumento>`** &mdash; (re)generate the remediation file and/or Coraly tasks (Section 6) from the current report's Fail and Aperto rows, without re-running the checklist.
+- **`audit registra <strumento>`** &mdash; register or update the Hub entry only (Section 2, point 11), without repeating the rest of the audit.
+
+## 10. Open points and reminders
+
+An audit result isn't binary. Some findings are real gaps that don't block this audit from passing, but still need to close for the tool to be fully aligned with what the company requires — most often because the actual cause sits in a different, connected tool or a missing integration, not in the one being audited.
+
+**When to mark a row Aperto instead of Fail or Pass** (Section 4): the requirement genuinely isn't met, not meeting it doesn't block this tier's Pass/Certificato outcome (check the tier's own checklist for which items are hard gates — a T3 gate item failing is never Aperto, it's Section 7's escalation), and — usually — the gap depends on something outside this tool's own scope: a missing API, an integration that should exist but doesn't, a policy owned by another team. Record exactly what it depends on in the "Dipende da" column; "not our problem" is not a valid entry there. If the gap is fully inside this tool's own control, it's a Fail, not an Aperto — don't use Aperto to soften a finding that belongs to the tool being audited.
+
+**Reminder cadence** &mdash; set by the row's own priority, never annual (a year is too slow for anything to actually get closed):
+
+| Priorit&agrave; | Promemoria |
+|---|---|
+| Alta | Ogni mese |
+| Media | Ogni due mesi |
+| Bassa | Ogni sei mesi |
+
+Compute the next reminder date when you register the audit in the Hub (Section 2, point 11) and store it there next to the tier and the next-audit date — the Hub is the system of record for when to resurface an open point, not this document. Until the Hub can send reminders on its own, treat every later interaction with this tool — a new audit, a remediation check-in, even an unrelated question about it — as a chance to resurface any Aperto item whose reminder date has passed, and tell the user directly which ones are now due; use `audit stato` (Section 9) to check without waiting for one of those to come up naturally.
+
+An Aperto item stays open until it's either resolved (re-audit it, mark Pass with evidence) or formally accepted as a permanent exception by the tier's Section 5 recipients — it doesn't close by going unremembered.

@@ -34,13 +34,13 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 Se il tuo assistente AI ha accesso a git, non serve allegargli i file: fagli clonare direttamente questo repository prima di iniziare l'intervista.
 
 ```bash
-git clone --branch v1.7.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.8.0 https://github.com/wearefiber/ai-governance-kit.git
 ```
 
 Oppure, per leggere un solo file senza clonare (es. dentro un prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.7.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.8.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 ## Versioning
