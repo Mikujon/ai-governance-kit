@@ -14,6 +14,7 @@ This file describes two tools by name — **Claude Code** (Anthropic) and **Code
 |---|---|
 | macOS / Linux / WSL | `curl -fsSL https://claude.ai/install.sh \| bash` |
 | Windows (PowerShell) | `irm https://claude.ai/install.ps1 \| iex` |
+| Windows (CMD) | `curl -fsSL https://claude.ai/install.cmd -o install.cmd && install.cmd && del install.cmd` |
 | macOS (Homebrew) | `brew install --cask claude-code` |
 | Windows (WinGet) | `winget install Anthropic.ClaudeCode` |
 
@@ -35,17 +36,20 @@ Run the init command (`/init` in both tools) to generate a starter `CLAUDE.md` (
 
 ## 2. Picking a mode — how much you supervise
 
-Both tools offer a spectrum from "ask me before everything" to "run unattended." The right point on that spectrum depends on the project's **tier** from `AI_PROJECT_GUIDELINES.md` — not on how much of a hurry you're in.
+Both tools offer a spectrum from "ask me before everything" to "run unattended." The right point on that spectrum depends on the project's **tier** from `AI_PROJECT_GUIDELINES.md` — not on how much of a hurry you're in, and not on what the tool starts you in by default (see the note below the table).
 
-| Mode | Claude Code | Codex CLI | Use it when |
-|---|---|---|---|
-| Full manual review | Manual mode (`claude --permission-mode default`) | `--ask-for-approval on-request` (the default) | Tier 2–3 work, unfamiliar code, anything touching real data |
-| Explore/plan without changing anything | Plan mode (`--permission-mode plan`, or `Shift+Tab`) | `/plan` | The start of any non-trivial task, regardless of tier — see what the assistant intends before it touches a single file |
-| Fewer prompts, still supervised | Manual mode + sandbox auto-allow (`/sandbox`) | `--sandbox workspace-write` | Tier 0–1 iteration on your own machine |
-| Hands-off | Auto mode (classifier reviews instead of you) | `--ask-for-approval never` (still sandboxed) | Low-stakes, well-scoped Tier 0–1 tasks only |
-| Fully unattended | `--dangerously-skip-permissions` | `--dangerously-bypass-approvals-and-sandbox` | **Inside a container/VM only** — see Section 4. Never on a laptop with real credentials or customer data reachable |
+| Mode | Config value | Claude Code | Codex CLI | Use it when |
+|---|---|---|---|---|
+| Manual — review everything | `default` (alias `manual`) | `claude --permission-mode default` | `--ask-for-approval on-request` (the default) | Tier 2–3 work, unfamiliar code, anything touching real data |
+| Plan — explore without changing anything | `plan` | `--permission-mode plan`, or `Shift+Tab` | `/plan` | The start of any non-trivial task, regardless of tier — see what the assistant intends before it touches a single file |
+| Accept edits — fewer prompts on file changes | `acceptEdits` | `--permission-mode acceptEdits`, or Manual mode + sandbox auto-allow (`/sandbox`) | `--sandbox workspace-write` | Tier 0–1 iteration you're reviewing via `git diff` afterward |
+| Auto — a classifier reviews instead of you | `auto` | `--permission-mode auto` | `--ask-for-approval never` (still sandboxed) | Routine, well-scoped Tier 0–1 work only, per this kit — see note below |
+| Don't ask — pre-approved tools only | `dontAsk` | `--permission-mode dontAsk` | n/a (use a narrow `--sandbox`/`--ask-for-approval` combination) | Locked-down CI or scripts with an exact allowlist, never an interactive session |
+| Fully unattended — no checks at all | `bypassPermissions` | `--dangerously-skip-permissions` | `--dangerously-bypass-approvals-and-sandbox` | **Inside a container/VM only** — see Section 4. Never on a laptop with real credentials or customer data reachable |
 
-**Default recommendation for this kit:** start every session in plan mode so the assistant states its approach before changing anything, then drop into manual or sandboxed-auto for the actual implementation. Reserve hands-off/unattended modes for Tier 0 personal scripts or for CI jobs that already run inside an isolated, disposable environment (Section 4).
+**Auto mode is not a low-stakes convenience anymore — read this before treating it as optional.** On Claude Code Pro, Max, and Team plans, **auto mode is the tool's own built-in starting mode** for interactive sessions — Claude Code does not wait for you to opt into it. Its classifier does block a real, specific list by default: secrets or credentials leaving the repository, force-push, production deploys and migrations, IAM/permission changes, disabling CI checks, destroying infrastructure, and more (Anthropic updates this list; `claude auto-mode defaults` prints the current one). That's a meaningful safety net — but it's a second AI model judging the first one's actions, not a human, and it can still misjudge something specific to your codebase or infrastructure that it has no way to know is sensitive.
+
+**Default recommendation for this kit:** treat the tool's starting mode as something to actively check, not trust — the first thing in any session on Tier 2+ work is confirming (or switching to, `Shift+Tab`) plan or manual mode, regardless of what the session actually opened in. Start every non-trivial session in plan mode so the assistant states its approach before changing anything, then drop into manual or accept-edits for the actual implementation. Reserve auto mode for routine Tier 0–1 iteration you're watching, and unattended/bypass modes strictly for Tier 0 personal scripts or CI jobs already running inside an isolated, disposable environment (Section 4).
 
 ---
 
@@ -88,10 +92,11 @@ A reasonable default `settings.json` (Claude Code) or `config.toml` (Codex CLI) 
   ```json
   {
     "permissions": {
-      "deny": ["Read(.env)", "Read(**/secrets/**)", "Read(**/*.pem)", "Read(**/*credentials*)"]
+      "deny": ["Read(./.env)", "Read(**/secrets/**)", "Read(**/*.pem)", "Read(**/*credentials*)"]
     }
   }
   ```
+  A deny rule stops the exact invocation form Claude usually produces, not every possible way to reach the same file — it isn't a security boundary on its own. Pair it with sandboxing (below) for anything that actually needs enforcing.
 - **Network restricted to what the task needs** — Codex CLI: `network_access = false` under `[sandbox_workspace_write]`, enabled per-domain only when required; Claude Code: deny raw `curl`/`wget` via Bash and use `WebFetch(domain:…)` allow rules instead for the domains actually needed.
 - **Ask (not allow) rules for anything that pushes, deploys, or deletes** — e.g. `Bash(git push *)`, `Bash(terraform apply *)` — so these always get a human look regardless of what mode the session is in.
 - **Checked into version control** where the tool supports it (Claude Code project settings), so the whole team gets the same floor and can review changes to it like any other config.
@@ -99,11 +104,13 @@ A reasonable default `settings.json` (Claude Code) or `config.toml` (Codex CLI) 
 
 ## 6. Good day-to-day habits
 
-- Let the assistant explore and explain before it changes anything on a codebase you don't know yet ("what does this do", "where's the entry point") — both tools read your files as needed without you manually attaching them.
-- Break multi-step work into an explicit numbered plan rather than one big vague ask.
-- Give it something to verify against — a failing test, an expected output, a screenshot — so it can check its own work instead of you finding the mistake later.
+- **Explore, then plan, then implement, then commit.** Let the assistant read and explain before it changes anything on a codebase you don't know yet ("what does this do", "where's the entry point"), then have it write a plan in plan mode before touching files, then implement and verify against that plan, then commit. Skip planning only when you could describe the resulting diff in one sentence (a typo fix, a log line, a rename).
+- **Give it something to verify against, and ask for the evidence, not just the claim.** A failing test to make pass, an expected output, a screenshot to compare against a design — so the assistant checks its own work instead of you finding the mistake later. Have it show the test output or the screenshot rather than just asserting "done."
+- **Use a fresh subagent for an adversarial review before calling something finished**, especially after a long or unattended run — a reviewer with only the diff and your criteria, not the reasoning that produced the change, catches gaps the implementing session is blind to. Point it at what to check (a plan, a spec, "correctness only, not style") so it doesn't just invent nitpicks.
+- Break multi-step work into an explicit numbered plan rather than one big vague ask; reference files and paste screenshots directly instead of describing where something lives.
 - Test/commit incrementally rather than accepting one huge diff at the end.
-- Course-correct immediately (stop/rewind) the moment it heads the wrong way, rather than letting it continue and cleaning up after.
+- Course-correct immediately (`Esc` to stop, `Esc Esc` or `/rewind` to roll back) the moment it heads the wrong way. After two failed corrections on the same issue in one session, `/clear` and restart with a sharper prompt instead of continuing to correct — a cluttered session rarely recovers on its own.
+- Keep any checked-in memory file (`CLAUDE.md` / `AGENTS.md`) ruthlessly short: for every line, ask "would removing this cause a mistake?" — if not, cut it or turn it into a hook. A bloated memory file is why an assistant starts ignoring instructions that used to work.
 - Review AI-authored changes the same way you'd review a colleague's pull request — this kit's per-tier requirements (a second reviewer at T2+, a documented fallback at T3) apply exactly the same whether the diff was written by a person or an assistant.
 
 ---
@@ -112,4 +119,4 @@ A reasonable default `settings.json` (Claude Code) or `config.toml` (Codex CLI) 
 
 This file doesn't change any tier or requirement — it's how you operate the tool while meeting the requirements the rest of the kit already sets. Section 4 above is itself one concrete way the Security & data handling rules in `AI_PROJECT_GUIDELINES.md` §4 and `AI_PROJECT_STRUCTURE.md` §3 get applied at the tool level, and belongs in any Tier 3 security review as evidence of how developer tooling is configured, not just how the application itself is.
 
-Sources consulted for this file (check them directly if something here seems to have changed — both vendors update fast): [Claude Code quickstart](https://code.claude.com/docs/en/quickstart), [permission modes](https://code.claude.com/docs/en/permission-modes), [permissions reference](https://code.claude.com/docs/en/permissions), [managing costs](https://code.claude.com/docs/en/costs), [Codex agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security), [Codex best practices](https://learn.chatgpt.com/guides/best-practices).
+Sources consulted for this file, last checked 2026-09-21 (check them directly if something here seems to have changed — both vendors update fast): [Claude Code quickstart](https://code.claude.com/docs/en/quickstart), [Claude Code best practices](https://code.claude.com/docs/en/best-practices), [permission modes](https://code.claude.com/docs/en/permission-modes), [permissions reference](https://code.claude.com/docs/en/permissions), [managing costs](https://code.claude.com/docs/en/costs), [Codex agent approvals & security](https://learn.chatgpt.com/docs/agent-approvals-security), [Codex best practices](https://learn.chatgpt.com/guides/best-practices).
