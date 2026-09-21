@@ -236,6 +236,7 @@ Applies to any project with a user interface.
 | `docs/architecture.md`, `docs/data-flow.md` | T2+ | Repo, linked from Hub |
 | `docs/runbook.md`, `docs/exceptions.md`, `SECURITY.md` | T3 | Repo, linked from Hub |
 | Prompt/model version log | T2+ (any generative component) | `src/ai/`, linked from Hub |
+| Legal/Privacy sign-off record (Section 12) | T2 (if triggered), T3 (always) | Hub record, referenced from `PROJECT.md` |
 
 ---
 
@@ -252,5 +253,54 @@ Every item above traces back to a numbered requirement in the `AI_Development_St
 | §4 Access control (ReBAC ties to Hub owner tuples) | §5.5 Ownership (items 30–33) |
 | §8 Observability (monitoring feeding review cadence) | §5.6 Automatic review reminder (items 34–38) |
 | §8 Observability (usage metrics) | §5.7 RPA / utility hub registration (items 39–42) |
+| §11 CISO / Security review steps | §5.1 Security & cyber approval (process behind items 1–10, not just the controls) |
+| §12 Legal & Privacy review steps | Not yet a numbered `AI_Development_Standard` section — treat every §12 T3 item as a gate item under `AI_PROJECT_AUDIT.md` Section 7 Escalation until it is |
 
 When auditing a project, walk this table left to right: check the structural requirement was actually implemented, then mark the corresponding `AI_Development_Standard` checklist item Pass/Fail with that implementation as the evidence.
+
+---
+
+## 11. CISO / Security review steps by tier
+
+Section 3 says what must be technically true. This section says who actually checks it, when, and how the sign-off gets recorded — the process behind the controls, tied to the Security/Cyber seat in `GOVERNANCE.md`.
+
+**[T0]** No formal review. The owner self-attests against Section 3's T0 items (no hardcoded secrets, data classified) before first use.
+
+**[T1]** No formal Security sign-off required. Recommended: the owner self-checks against Section 3's T1 items before the tool goes live; nothing to record in the Hub unless something looks wrong.
+
+**[T2]**
+1. Before go-live, the owner requests a review from the Security/Cyber seat, pointing them at `docs/architecture.md`, the SAST results, and the access-logging design.
+2. Security/Cyber checks the Section 3 T2 items (SAST clean or explained, access logs in place, encryption in transit/at rest) and either signs off or lists what's missing.
+3. Sign-off is recorded in the Hub: approver name, date, and the kit/tier version it was checked against.
+4. Re-checked at the standard T2 cadence (12 months, `AI_PROJECT_GUIDELINES.md` Section 5) — via the normal audit, not a separate process.
+
+**[T3]**
+1. The owner requests review with `docs/architecture.md`, `docs/data-flow.md`, and a `SECURITY.md` draft attached — not a verbal description.
+2. Security/Cyber commissions or runs the penetration test before go-live; the result (dated, with findings) is the evidence, not a statement that one is planned.
+3. For any generative/LLM component, Security/Cyber explicitly assesses and documents prompt-injection and data-leakage risk — a generic policy statement doesn't satisfy this (same rule as `AI_PROJECT_AUDIT.md` Section 2, point 5).
+4. Any third-party AI/model provider is reviewed for data residency and retention as part of the same pass, not separately.
+5. Sign-off is recorded with approver name, date, and expiry — the next quarter's date, matching the T3 audit cadence.
+6. A missing or expired sign-off is a **gate item**: the project doesn't go live, or is flagged non-compliant if already running, until it's resolved — escalate per `AI_PROJECT_AUDIT.md` Section 7, never mark it "Partial" and move on.
+
+---
+
+## 12. Legal & Privacy review steps by tier
+
+There is no Legal/Privacy equivalent of Section 3 elsewhere in this kit — this section is it. Tied to the Legal/Privacy seat in `GOVERNANCE.md`; "Legal" here covers data protection/privacy specifically, not general contract law.
+
+**[T0]** No formal review. The owner classifies any data touched (Public / Internal / Confidential / Restricted, `AI_PROJECT_GUIDELINES.md`) before first use.
+
+**[T1]** No formal Legal sign-off. If the tool calls a third-party API/service, the owner confirms its terms of service don't prohibit the intended use — a one-line note in `PROJECT.md` is enough.
+
+**[T2]** Legal/Privacy review is triggered, not automatic — only when the project touches personal/financial/health data, or sends data to a third-party AI provider:
+1. If triggered, Legal/Privacy confirms a Data Processing Agreement (DPA) exists with that provider before go-live.
+2. Legal/Privacy confirms the retention/deletion policy (Section 5 T2+) matches what the company requires for that data's classification.
+3. Sign-off recorded in the Hub: approver name, date. If not triggered, the Hub record says so explicitly ("Legal review: not triggered — no regulated data, no third-party data transfer") rather than leaving the field blank.
+
+**[T3]** Always required, not triggered by a condition:
+1. A Data Protection Impact Assessment (DPIA)-style review whenever the tool touches personal, financial, or health data, or acts autonomously on someone's behalf.
+2. Legal/Privacy confirms which EU AI Act risk class applies (`PILLARS_COVERAGE.md` Section 8's crosswalk is the starting point, not the final word) and what obligations follow from it — transparency notice, human oversight, technical documentation.
+3. A DPA/contract is executed and referenced in the Hub record before any personal data leaves the company to a third-party AI provider — not "in progress," executed.
+4. The retention and deletion policy (Section 5 T3) gets an explicit Legal/Privacy sign-off, not just a technical one.
+5. Sign-off recorded with approver name, date, and expiry, on the same T3 cadence as the Security review (Section 11).
+6. A missing or expired Legal/Privacy sign-off on any of the above is a **gate item**, handled exactly like a Security gate failure — escalate per `AI_PROJECT_AUDIT.md` Section 7, never wave it through as a documentation gap.
