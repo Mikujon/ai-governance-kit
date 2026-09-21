@@ -39,7 +39,7 @@ Gates 1–4 are stop conditions: if any can't be satisfied, **stop and say so** 
 12. **Set the next audit date** before you finish — 12 months out for T2, the next quarter for T3 (`AI_PROJECT_GUIDELINES.md` Section 5).
 13. **If you discovered a different, unrelated tool while auditing this one** — a script it calls, an adjacent automation, anything not already classified — don't fold it into this audit and don't ignore it. Log it as its own finding, tell the user it needs its own classification, and point them to `AI_INTAKE_ASSESSMENT.md` or this file, whichever fits.
 14. **Map the data before you close the audit.** For every requirement that touches data, record explicitly where it enters the tool, whether it's customer, personal, financial, or otherwise regulated data (`AI_PROJECT_GUIDELINES.md`'s data classification scale), where it's stored, and which other systems or tools consume its output. A data-related row with no lineage behind it is a guess, not evidence. Run this on its own with the `audit mappa-dati` command (Section 9) when you only need the data picture, not a full audit.
-15. **For a T3 tool, trigger the Technical Depth Review.** This checklist confirms the tool is critical; it doesn't check whether the code underneath can actually carry that weight — `AI_TECHNICAL_DEPTH_REVIEW.md` does, as a separate, line-by-line pass on top of this one (queries, data-access patterns, caching, API maturity, scalability). Run it, or schedule it explicitly with a date, before calling a T3 audit finished. Its findings feed into the same remediation plan as this audit's (Section 6), tagged `[Tecnico]`.
+15. **Trigger the Technical Depth Review, at the depth the confirmed tier calls for.** This checklist confirms conformity; it doesn't check whether the code underneath can actually carry the tool's real weight — `AI_TECHNICAL_DEPTH_REVIEW.md` does, scaled by tier from a short spot-check at T1 to a full enterprise-grade, line-by-line pass at T3 (T0 is the only tier it skips entirely). Run it, or schedule it explicitly with a date, before calling any T1+ audit finished. Its findings feed into the same remediation plan as this audit's (Section 6), tagged `[Tecnico]`.
 
 ## 3. What this is not
 
@@ -177,7 +177,7 @@ The point of running any of this at all is to end up with **every** AI-built too
 
 Section 9 and Section 10, below, give you a way in and out again for one narrow question about a tool already in the system — starting a full audit from scratch isn't the only door.
 
-For a T3 tool, this file's own checklist stops at conformity by design (Section 3) — `AI_TECHNICAL_DEPTH_REVIEW.md` is the companion pass that actually reads the code, and Section 2 point 15 above is where it gets triggered.
+This file's own checklist stops at conformity by design (Section 3) — `AI_TECHNICAL_DEPTH_REVIEW.md` is the companion pass that actually reads the code, scaled by tier from T1 up, and Section 2 point 15 above is where it gets triggered.
 
 ## 9. Direct commands
 

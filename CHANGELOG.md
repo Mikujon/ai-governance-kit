@@ -4,11 +4,11 @@ Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [K
 
 ## [1.13.0] — 2026-09-22
 
-Aggiunge la revisione tecnica riga per riga obbligatoria per i Tier 3, e la responsabilit&agrave; esplicita dei quattro seat sulla chiusura della remediation &mdash; entrambe emerse da un audit reale che ha correttamente riconosciuto i limiti dell'audit di governance, senza un modo strutturato per andare oltre.
+Aggiunge la revisione tecnica del codice come dimensione proporzionale al tier (non un interruttore T3 sì/no), e la responsabilit&agrave; esplicita dei quattro seat sulla chiusura della remediation T3 &mdash; entrambe emerse da un audit reale che ha correttamente riconosciuto i limiti dell'audit di governance, senza un modo strutturato per andare oltre in modo proporzionato.
 
 ### Aggiunto
-- **`AI_TECHNICAL_DEPTH_REVIEW.md` (nuovo file).** Companion obbligatorio di `AI_PROJECT_AUDIT.md` per ogni strumento Tier 3: revisione tecnica riga per riga (mai un rebuild, mai un sostituto dell'audit di governance) su query, pattern di accesso al database, cache, maturit&agrave; delle API, scalabilit&agrave; al target di scala reale. Ogni finding cita file e riga esatti e propone una direzione concreta, non solo segnala il gap. Si parte dai moduli a maggiore carico/impatto, non dall'intero codice riga per riga.
-- **`AI_PROJECT_AUDIT.md` Sezione 2, punto 15.** Attiva automaticamente la revisione tecnica quando lo strumento &egrave; confermato T3 &mdash; i suoi finding confluiscono nello stesso piano di remediation (Sezione 6), contrassegnati `[Tecnico]`.
+- **`AI_TECHNICAL_DEPTH_REVIEW.md` (nuovo file).** Companion di `AI_PROJECT_AUDIT.md` da Tier 1 in su, con profondit&agrave; scalata come tutto il resto del kit: T0 non si applica, T1 uno spot-check sul percorso pi&ugrave; critico, T2 revisione mirata sui moduli a maggior carico, T3 revisione completa riga per riga su ogni area (query, accesso al database, cache, maturit&agrave; delle API, scalabilit&agrave; al target di scala reale). Mai un rebuild, mai un sostituto dell'audit di governance: ogni finding cita file e riga esatti e propone una direzione concreta, non solo segnala il gap.
+- **`AI_PROJECT_AUDIT.md` Sezione 2, punto 15.** Attiva automaticamente la revisione tecnica sulla base del tier confermato &mdash; i suoi finding confluiscono nello stesso piano di remediation (Sezione 6), contrassegnati `[Tecnico]`.
 - **`AI_PROJECT_AUDIT.md` Sezione 6 &mdash; Garanzia dei chair (T3).** Ogni punto della remediation viene assegnato a uno dei quattro seat (Chair, Engineering, Security/Cyber, Legal/Privacy); il piano non si considera chiuso finch&eacute; ciascun seat non certifica la propria parte con nome e data &mdash; non una spunta messa dall'assistente per loro conto.
 - `GOVERNANCE.md` Sezione 2 &mdash; nuova riga nella tabella "What needs whom": la chiusura di un piano di remediation T3 richiede la certificazione di tutti e quattro i seat.
 
