@@ -17,6 +17,7 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 | `00_START_HERE.md` | Indice e punto di partenza. |
 | `AI_INTAKE_ASSESSMENT.md` | Script per l'AI: come intervistare l'utente e assegnare il tier, per un progetto **nuovo**. |
 | `AI_PROJECT_AUDIT.md` | Script per l'AI: come auditare uno strumento **già esistente** — conferma il tier, applica la checklist giusta, produce un documento di audit scritto. |
+| `AI_TECHNICAL_DEPTH_REVIEW.md` | Script per l'AI: revisione tecnica riga per riga per gli strumenti Tier 3 — query, cache, API, scalabilità. Complementare all'audit di governance, mai un sostituto. |
 | `PROJECT_STARTER_T0_PERSONAL.md` | Starter per script/report personali, usa-e-getta. |
 | `PROJECT_STARTER_T1_BASIC.md` | Starter per piccoli strumenti interni. |
 | `PROJECT_STARTER_T2_STANDARD.md` | Starter per strumenti dipartimentali/integrati. |
@@ -34,13 +35,13 @@ Perché esiste: senza un modello comune, ogni script o automazione interna risch
 Se il tuo assistente AI ha accesso a git, non serve allegargli i file: fagli clonare direttamente questo repository prima di iniziare l'intervista.
 
 ```bash
-git clone --branch v1.12.0 https://github.com/wearefiber/ai-governance-kit.git
+git clone --branch v1.13.0 https://github.com/wearefiber/ai-governance-kit.git
 ```
 
 Oppure, per leggere un solo file senza clonare (es. dentro un prompt):
 
 ```
-https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.12.0/AI_INTAKE_ASSESSMENT.md
+https://raw.githubusercontent.com/wearefiber/ai-governance-kit/v1.13.0/AI_INTAKE_ASSESSMENT.md
 ```
 
 ## Versioning
