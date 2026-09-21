@@ -2,6 +2,17 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.11.0] — 2026-09-21
+
+Aggiunge un metodo esplicito dietro la remediation, non solo una checklist da spuntare — richiesto per assicurare che le correzioni siano sviluppate bene, non solo segnate come fatte.
+
+### Aggiunto
+- **`AI_PROJECT_AUDIT.md` Sezione 6 &mdash; il metodo a cinque passi.** Analizza (causa radice, non il sintomo &mdash; e verifica se la stessa causa spiega pi&ugrave; Fail insieme, Sezione 2 punto 13), Pianifica (riusa la data gi&agrave; nel report, non duplicata), Esegui (una remediation che tocca sicurezza/dati passa dalla stessa revisione richiesta per codice nuovo, `AI_PROJECT_STRUCTURE.md` Sezioni 3 e 11), Verifica (evidenza richiesta prima di spuntare, non "fatto"), Chiudi (lo stato passa a Pass solo con un audit successivo o `audit stato`/`audit remediation`, mai spuntando da soli il file di remediation).
+- Template di remediation (Sezione 6) esteso con il campo "causa radice" su ogni punto, Fail e Aperto.
+
+### Modificato
+- Riferimenti di versione (`README.md`, `00_START_HERE.md`, `AI_INTAKE_ASSESSMENT.md`, `AI_PROJECT_AUDIT.md`) aggiornati a `v1.11.0`.
+
 ## [1.10.0] — 2026-09-21
 
 Aggiunge a `AI_PROJECT_STRUCTURE.md` il processo di revisione Security/CISO e Legal/Privacy per tier — non solo cosa deve essere vero (gi&agrave; in Sezione 3), ma chi lo controlla, quando, e come viene registrata la firma. Il vuoto pi&ugrave; grande era Legal: non esisteva alcuna sezione equivalente alla Sezione 3 per la privacy/compliance.

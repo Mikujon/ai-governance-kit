@@ -2,7 +2,7 @@
 
 **When to use this file:** the moment someone asks you to check, review, or audit an AI tool or automation that **already exists** — not when they want to build something new. If what they're describing hasn't been built yet, stop and use `AI_INTAKE_ASSESSMENT.md` instead; this file assumes there's a real, running thing to look at.
 
-This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.10.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
+This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.11.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
 
 This file also defines a small set of direct commands (Section 9) for running one specific piece of the audit on its own — starting one, mapping data flow, checking open-point status, generating remediation, or registering in the Hub — instead of always walking the full flow below. When one of those commands is invoked, stay strictly inside its stated goal until it's delivered or the user explicitly ends it; don't let the conversation drift to something else mid-command.
 
@@ -110,22 +110,31 @@ Whenever the audit produces at least one Fail, or at least one Aperto item with 
 
 **Where the tasks actually live.** If Coraly is connected, open each task there instead of only describing it in this file — this file is the fallback for as long as that connection doesn't exist, or for tasks Coraly has no field for (a structural or organizational change, not a code change). If a more direct integration becomes available later (e.g. a Coraly MCP server reachable from this chat), use that the same way — put the task where it actually gets tracked and reminded on, not just where it was convenient to write it down.
 
+**The method — five steps, not just a checkbox.** A remediation prompt that only lists what's wrong invites a surface-level fix that doesn't survive the next audit. Apply this to every item, Fail or Aperto:
+
+1. **Analizza — la causa, non il sintomo.** Perch&eacute; &egrave; successo, non solo cosa manca. Una causa radice spesso spiega pi&ugrave; di un Fail insieme &mdash; se la causa &egrave; un altro strumento o un processo condiviso, dillo (stessa logica di Sezione 2, punto 13), non limitarti a correggere il sintomo qui. Va nel campo "causa radice" del checklist qui sotto.
+2. **Pianifica.** Cosa cambia esattamente, chi lo fa, entro quando &mdash; la data &egrave; gi&agrave; nel report (Sezione 4, colonna "Risposta owner"); non duplicarla in questo file.
+3. **Esegui.** Applica la modifica. Se tocca sicurezza, dati o accesso, passa dalla stessa revisione che questo kit richiederebbe comunque per codice nuovo (`AI_PROJECT_STRUCTURE.md` Sezioni 3 e 11) &mdash; una remediation non &egrave; un'eccezione al processo normale.
+4. **Verifica.** Prima di spuntare la casella, produci l'evidenza richiesta a fianco al punto &mdash; non "fatto", ma cosa lo dimostra. Spuntare senza evidenza &egrave; esattamente l'autocertificazione che Sezione 3 vieta, solo spostata in un altro file.
+5. **Chiudi.** Una casella spuntata qui non chiude da sola il punto nel registro di governance &mdash; lo chiude solo un audit successivo, o `audit stato`/`audit remediation` (Sezione 9), che conferma l'evidenza e aggiorna lo stato da Fail/Aperto a Pass nell'Hub.
+
 ```markdown
 # Remediation &mdash; <nome progetto>
 
 Basato su: audit del <data>, tier T<0-3>.
 
-Per ogni punto: applica la modifica, poi spunta. Non chiudere un punto
-senza l'evidenza richiesta a fianco. Dove aperto un task su Coraly,
+Per ogni punto: analizza la causa, esegui la modifica, poi spunta solo
+con l'evidenza di verifica a fianco &mdash; un punto spuntato senza evidenza
+non &egrave; chiuso, &egrave; solo nascosto. Dove aperto un task su Coraly,
 riportare qui solo il link/ID &mdash; non duplicare il testo.
 
 ## Da correggere (Fail &mdash; bloccano l'audit)
 
-- [ ] <requisito in Fail #1> &mdash; <cosa manca esattamente> &mdash; evidenza richiesta: <...> &mdash; task: <link Coraly o "vedi sotto">
+- [ ] <requisito in Fail #1> &mdash; causa radice: <...> &mdash; cosa manca esattamente: <...> &mdash; evidenza di verifica richiesta: <...> &mdash; task: <link Coraly o "vedi sotto">
 
 ## Punti aperti (Aperto &mdash; non bloccano l'audit, cadenza promemoria in Sezione 10)
 
-- [ ] <requisito Aperto #1> &mdash; dipende da: <strumento/integrazione> &mdash; prossimo promemoria: <data> &mdash; task: <link Coraly o "vedi sotto">
+- [ ] <requisito Aperto #1> &mdash; causa radice: <...> &mdash; dipende da: <strumento/integrazione> &mdash; prossimo promemoria: <data> &mdash; task: <link Coraly o "vedi sotto">
 
 ## Struttura di riferimento
 
@@ -134,7 +143,8 @@ la struttura, quella del tier confermato &egrave; gi&agrave; quella giusta.
 
 ## Quando richiedere un nuovo audit
 
-Solo dopo aver chiuso tutti i punti a priorit&agrave; Alta. I punti a priorit&agrave;
+Solo dopo aver chiuso tutti i punti a priorit&agrave; Alta &mdash; "chiuso" vuol
+dire verificato (passo 4), non solo eseguito. I punti a priorit&agrave;
 Media/Bassa non bloccano una ri-verifica.
 ```
 
