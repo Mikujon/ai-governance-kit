@@ -58,6 +58,7 @@ Tier 3 projects must also follow the full **AI Development Standard** document (
 | Secrets kept out of code (vault/env, never hardcoded) | ● | ● | ● | ● |
 | No personal/sensitive data without a check first | ● | ● | ● | ● |
 | Formal security/cyber review & sign-off | — | — | ○ | ● |
+| Legal/Privacy review & sign-off (regulated data or 3rd-party AI data transfer) | — | — | ○ (if triggered) | ● |
 | Penetration test | — | — | — | ● |
 | Data architecture documented for reuse/integration | — | — | ● | ● |
 | Exposed via documented API/contract (not ad-hoc) | — | — | ○ | ● |
@@ -93,6 +94,7 @@ Each item is tagged with the tier it starts applying at — apply everything tag
 - **[T3]** Penetration test before go-live and annually thereafter.
 - **[T3]** Explicitly assess prompt-injection and data-leakage risk for any generative/LLM component.
 - **[T3]** Any third-party AI/model provider reviewed for data residency and retention; signed data processing agreement if personal data leaves the company.
+- **[T2+]** The actual review process — who does what, when, and how sign-off is recorded — is `AI_PROJECT_STRUCTURE.md` Section 11 (Security/CISO) and Section 12 (Legal/Privacy); this list is what must be true, those sections are how it gets checked.
 
 ### Data architecture & integration
 - **[T0-T1]** Keep it simple — a local file or a personal table is fine.
