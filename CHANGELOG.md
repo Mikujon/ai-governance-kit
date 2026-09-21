@@ -2,6 +2,23 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.12.0] — 2026-09-21
+
+Verifica `AI_ASSISTANT_USAGE_GUIDE.md` contro la documentazione ufficiale corrente di Claude Code (controllata il 2026-09-21) invece di lasciarlo invariato dalla stesura originale &mdash; alcune modalit&agrave; di permesso erano cambiate nella realt&agrave;, non solo nel file.
+
+### Corretto
+- **Modalit&agrave; auto non &egrave; pi&ugrave; opzionale.** Su Claude Code Pro/Max/Team &egrave; ora la modalit&agrave; di partenza predefinita delle sessioni interattive, non qualcosa che si sceglie. Il file ora lo dice esplicitamente e sposta la raccomandazione: controllare (o cambiare) la modalit&agrave; a inizio sessione per lavoro T2+, invece di assumere che il default sia gi&agrave; quello prudente.
+- Sintassi della regola deny corretta da `Read(.env)` a `Read(./.env)` (quella vecchia non era la sintassi reale del tool).
+- Aggiunta la modalit&agrave; `dontAsk` (CI con allowlist esatta), mancante dalla tabella delle modalit&agrave; insieme a `acceptEdits` come voce distinta.
+- Aggiunta la riga Windows CMD alla tabella di installazione.
+
+### Aggiunto
+- Sezione 6 &mdash; pattern verificati dalla guida ufficiale: ciclo Esplora/Pianifica/Implementa/Commit, dare evidenza (non solo l'affermazione) come verifica, revisione avversariale con un subagent a contesto pulito prima di considerare concluso un lavoro non presidiato, disciplina di potatura del file di memoria (`CLAUDE.md`/`AGENTS.md`).
+- Fonti aggiornate in fondo al file con la data dell'ultima verifica.
+
+### Modificato
+- Riferimenti di versione (`README.md`, `00_START_HERE.md`, `AI_INTAKE_ASSESSMENT.md`, `AI_PROJECT_AUDIT.md`) aggiornati a `v1.12.0`.
+
 ## [1.11.0] — 2026-09-21
 
 Aggiunge un metodo esplicito dietro la remediation, non solo una checklist da spuntare — richiesto per assicurare che le correzioni siano sviluppate bene, non solo segnate come fatte.
