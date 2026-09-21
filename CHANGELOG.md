@@ -2,6 +2,18 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.10.0] — 2026-09-21
+
+Aggiunge a `AI_PROJECT_STRUCTURE.md` il processo di revisione Security/CISO e Legal/Privacy per tier — non solo cosa deve essere vero (gi&agrave; in Sezione 3), ma chi lo controlla, quando, e come viene registrata la firma. Il vuoto pi&ugrave; grande era Legal: non esisteva alcuna sezione equivalente alla Sezione 3 per la privacy/compliance.
+
+### Aggiunto
+- **`AI_PROJECT_STRUCTURE.md` Sezione 11 &mdash; passi CISO/Security per tier.** T0/T1 nessuna revisione formale; T2 richiesta dell'owner + controllo Security/Cyber sui requisiti T2 di Sezione 3, firma registrata nell'Hub; T3 procedura completa con pentest datato, valutazione esplicita di prompt-injection/data-leakage, revisione dei provider AI terzi, firma con scadenza allineata alla cadenza trimestrale &mdash; una firma mancante o scaduta &egrave; un gate item, va in escalation (`AI_PROJECT_AUDIT.md` Sezione 7), non segnata "Parziale".
+- **`AI_PROJECT_STRUCTURE.md` Sezione 12 (nuova) &mdash; passi Legal/Privacy per tier.** Prima assente dal kit. T0/T1 nessuna revisione formale; T2 attivata solo se il progetto tocca dati regolati o trasferisce dati a un provider AI terzo (DPA + policy di retention); T3 sempre richiesta &mdash; valutazione in stile DPIA, classificazione del rischio EU AI Act, DPA eseguito (non "in corso"), firma su retention/deletion, stessa cadenza e stessa escalation della revisione Security.
+- `AI_PROJECT_GUIDELINES.md` Sezione 3 (matrice requisiti) &mdash; nuova riga "Legal/Privacy review & sign-off", a fianco di quella gi&agrave; esistente per Security/Cyber.
+
+### Modificato
+- Riferimenti di versione (`README.md`, `00_START_HERE.md`, `AI_INTAKE_ASSESSMENT.md`, `AI_PROJECT_AUDIT.md`) aggiornati a `v1.10.0`.
+
 ## [1.9.0] — 2026-09-21
 
 Aggiunge un livello di domande adattive sopra le dieci fisse, e chiude lo spazio per eludere l'intervista — entrambe richieste dopo aver osservato come l'AI viene effettivamente usata sul campo.
