@@ -2,6 +2,19 @@
 
 Tutte le modifiche rilevanti a questo kit sono elencate qui. Il formato segue [Keep a Changelog](https://keepachangelog.com/it/1.0.0/); il versioning segue [Semantic Versioning](https://semver.org/lang/it/).
 
+## [1.9.0] — 2026-09-21
+
+Aggiunge un livello di domande adattive sopra le dieci fisse, e chiude lo spazio per eludere l'intervista — entrambe richieste dopo aver osservato come l'AI viene effettivamente usata sul campo.
+
+### Aggiunto
+- **`AI_PROJECT_GUIDELINES.md` Sezione 7 — approfondimento adattivo.** Tabelle "per tipo di strumento" (LLM, bot RPA, flusso no-code, pipeline dati, app/chatbot cliente, assistente con accesso a tool/MCP) e "per area business" (Finance/Payments, HR, Sales/CRM, Legal, Support, Engineering/Infra) con le domande specifiche da aggiungere una volta noto il tier. Le dieci domande fisse restano identiche per tutti — questa sezione aggiunge profondità dove serve, non sostituisce né sposta il tier da sola.
+- `AI_INTAKE_ASSESSMENT.md` e `AI_PROJECT_AUDIT.md` ora rimandano entrambi a quella sezione, così le domande di approfondimento sono le stesse sia in fase di costruzione sia in fase di audit, invece di due elenchi paralleli.
+
+### Modificato
+- **`AI_INTAKE_ASSESSMENT.md` Sezione 1 — niente più modo di girarci intorno.** Una risposta vaga fa scattare il follow-up già previsto; se anche dopo il follow-up l'utente non risponde davvero (rifiuta, cambia argomento, dice "metti quello che vuoi"), l'assistente non indovina e non lascia cadere la domanda in silenzio — la segnala esplicitamente e applica la regola di classificazione per eccesso già prevista in Sezione 3 (ora estesa esplicitamente al rifiuto di rispondere, non solo all'incertezza). Aggiunto un punto finale esplicito: l'intervista, una volta iniziata, va finita prima di passare ad altro — un "iniziamo pure a costruire" non la sostituisce silenziosamente.
+- `AI_PROJECT_AUDIT.md` Sezione 2, punto 4 — ogni audit ricontrolla anche gli approfondimenti adattivi della Sezione 7 di `AI_PROJECT_GUIDELINES.md`, non solo alla prima classificazione: uno strumento può aver aggiunto un componente LLM o iniziato a toccare pagamenti dopo il primo audit.
+- Riferimenti di versione (`README.md`, `00_START_HERE.md`, `AI_INTAKE_ASSESSMENT.md`, `AI_PROJECT_AUDIT.md`) aggiornati a `v1.9.0`; corretto anche un riferimento rimasto fermo a `v1.3.0` in `AI_INTAKE_ASSESSMENT.md`.
+
 ## [1.8.0] — 2026-09-21
 
 Estende `AI_PROJECT_AUDIT.md` con un modo di entrare e uscire da un audit senza dover sempre percorrere l'intero flusso, e con un modo di tracciare i gap che non bloccano l'audit ma non vanno persi — richieste emerse riascoltando come viene effettivamente usato oggi.
