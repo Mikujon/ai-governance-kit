@@ -26,6 +26,7 @@ A seat with no name assigned is not a decision-blocker for day-to-day Tier 0–2
 | Tier 0–1 classification, day-to-day building | No council involvement — self-classify or ask a department champion (`AI_ASSISTANT_USAGE_GUIDE.md`). |
 | Tier 2 classification or go-live | Any one council seat can confirm; no full-council review needed. |
 | Tier 3 go-live sign-off | Chair (or backup) **and** Security seat. Legal seat added if the project touches regulated data or a third-party AI provider. |
+| Tier 3 remediation plan closure | All four seats certify their own share — Chair the plan as a whole, Engineering the technical items, Security the security items, Legal the data/regulatory items (`AI_PROJECT_AUDIT.md` Section 6) — not delegable to the auditing assistant alone. |
 | A kit change to this repository | Chair approval always (`CODEOWNERS`). Security seat co-approves if the change loosens a security requirement (`CONTRIBUTING.md`, "Cosa NON fare"). |
 | A disputed or edge-case tier | Whichever seat is asked first defaults to the *higher* candidate tier and loops in the Chair — same rule the kit already gives individual builders in `AI_PROJECT_GUIDELINES.md` Section 6, applied one level up. |
 | Tie among the council | Chair casts the deciding vote. |

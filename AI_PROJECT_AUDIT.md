@@ -2,7 +2,7 @@
 
 **When to use this file:** the moment someone asks you to check, review, or audit an AI tool or automation that **already exists** — not when they want to build something new. If what they're describing hasn't been built yet, stop and use `AI_INTAKE_ASSESSMENT.md` instead; this file assumes there's a real, running thing to look at.
 
-This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.12.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
+This file assumes you also have access to `AI_PROJECT_GUIDELINES.md` (the requirements matrix), `PILLARS_COVERAGE.md`, `GOVERNANCE.md`, and — for anything that turns out to be Tier 3 — `reference/AI_Development_Standard.docx` Section 7 (the 42-point checklist). If you have git access, clone the kit rather than working from a partial file set: `git clone --branch v1.13.0 https://github.com/wearefiber/ai-governance-kit.git` — record the tag you audited against per Section 1, step 3 below.
 
 This file also defines a small set of direct commands (Section 9) for running one specific piece of the audit on its own — starting one, mapping data flow, checking open-point status, generating remediation, or registering in the Hub — instead of always walking the full flow below. When one of those commands is invoked, stay strictly inside its stated goal until it's delivered or the user explicitly ends it; don't let the conversation drift to something else mid-command.
 
@@ -39,6 +39,7 @@ Gates 1–4 are stop conditions: if any can't be satisfied, **stop and say so** 
 12. **Set the next audit date** before you finish — 12 months out for T2, the next quarter for T3 (`AI_PROJECT_GUIDELINES.md` Section 5).
 13. **If you discovered a different, unrelated tool while auditing this one** — a script it calls, an adjacent automation, anything not already classified — don't fold it into this audit and don't ignore it. Log it as its own finding, tell the user it needs its own classification, and point them to `AI_INTAKE_ASSESSMENT.md` or this file, whichever fits.
 14. **Map the data before you close the audit.** For every requirement that touches data, record explicitly where it enters the tool, whether it's customer, personal, financial, or otherwise regulated data (`AI_PROJECT_GUIDELINES.md`'s data classification scale), where it's stored, and which other systems or tools consume its output. A data-related row with no lineage behind it is a guess, not evidence. Run this on its own with the `audit mappa-dati` command (Section 9) when you only need the data picture, not a full audit.
+15. **Trigger the Technical Depth Review, at the depth the confirmed tier calls for.** This checklist confirms conformity; it doesn't check whether the code underneath can actually carry the tool's real weight — `AI_TECHNICAL_DEPTH_REVIEW.md` does, scaled by tier from a short spot-check at T1 to a full enterprise-grade, line-by-line pass at T3 (T0 is the only tier it skips entirely). Run it, or schedule it explicitly with a date, before calling any T1+ audit finished. Its findings feed into the same remediation plan as this audit's (Section 6), tagged `[Tecnico]`.
 
 ## 3. What this is not
 
@@ -118,10 +119,13 @@ Whenever the audit produces at least one Fail, or at least one Aperto item with 
 4. **Verifica.** Prima di spuntare la casella, produci l'evidenza richiesta a fianco al punto &mdash; non "fatto", ma cosa lo dimostra. Spuntare senza evidenza &egrave; esattamente l'autocertificazione che Sezione 3 vieta, solo spostata in un altro file.
 5. **Chiudi.** Una casella spuntata qui non chiude da sola il punto nel registro di governance &mdash; lo chiude solo un audit successivo, o `audit stato`/`audit remediation` (Sezione 9), che conferma l'evidenza e aggiorna lo stato da Fail/Aperto a Pass nell'Hub.
 
+**A T3 &mdash; ogni seat certifica la propria parte, non solo l'assistente.** Un piano di remediation per uno strumento Tier 3 tocca pi&ugrave; di semplice codice: Engineering chiude i punti tecnici, Security/Cyber chiude quelli di sicurezza, Legal/Privacy chiude quelli su dati e regolazione, e il Chair conferma il piano nel suo insieme prima che lo strumento si consideri rimediato. Assegna ogni punto a esattamente uno di questi quattro quando scrivi il piano &mdash; non "a chi arriva prima" &mdash; e non considerare il piano chiuso finch&eacute; ciascun seat non ha firmato la propria sezione, con nome e data, non una spunta che l'assistente ha messo per loro. Un piano di remediation verificato solo dall'assistente &egrave; esattamente l'autocertificazione che la Sezione 3 vieta gi&agrave;, solo a livello di consiglio invece che individuale.
+
 ```markdown
 # Remediation &mdash; <nome progetto>
 
-Basato su: audit del <data>, tier T<0-3>.
+Basato su: audit del <data>, tier T<0-3>. Include i finding tecnici di
+AI_TECHNICAL_DEPTH_REVIEW.md, se eseguita (contrassegnati [Tecnico]).
 
 Per ogni punto: analizza la causa, esegui la modifica, poi spunta solo
 con l'evidenza di verifica a fianco &mdash; un punto spuntato senza evidenza
@@ -130,21 +134,32 @@ riportare qui solo il link/ID &mdash; non duplicare il testo.
 
 ## Da correggere (Fail &mdash; bloccano l'audit)
 
-- [ ] <requisito in Fail #1> &mdash; causa radice: <...> &mdash; cosa manca esattamente: <...> &mdash; evidenza di verifica richiesta: <...> &mdash; task: <link Coraly o "vedi sotto">
+- [ ] <requisito in Fail #1> &mdash; causa radice: <...> &mdash; cosa manca esattamente: <...> &mdash; evidenza di verifica richiesta: <...> &mdash; seat responsabile (solo T3): <Chair / Engineering / Security / Legal> &mdash; task: <link Coraly o "vedi sotto">
 
 ## Punti aperti (Aperto &mdash; non bloccano l'audit, cadenza promemoria in Sezione 10)
 
-- [ ] <requisito Aperto #1> &mdash; causa radice: <...> &mdash; dipende da: <strumento/integrazione> &mdash; prossimo promemoria: <data> &mdash; task: <link Coraly o "vedi sotto">
+- [ ] <requisito Aperto #1> &mdash; causa radice: <...> &mdash; dipende da: <strumento/integrazione> &mdash; prossimo promemoria: <data> &mdash; seat responsabile (solo T3): <...> &mdash; task: <link Coraly o "vedi sotto">
 
 ## Struttura di riferimento
 
 Allinea la correzione a `PROJECT_STARTER_T<tier>.md` &mdash; non reinventare
 la struttura, quella del tier confermato &egrave; gi&agrave; quella giusta.
 
+## Garanzia dei chair (obbligatoria solo a T3)
+
+Il piano non &egrave; chiuso finch&eacute; ognuno dei quattro seat non certifica
+la propria parte &mdash; non basta la spunta dell'assistente.
+
+- [ ] **Chair** &mdash; <nome>, <data> &mdash; conferma il piano nel suo insieme
+- [ ] **Engineering** &mdash; <nome>, <data> &mdash; conferma i punti tecnici chiusi con evidenza
+- [ ] **Security / Cyber** &mdash; <nome>, <data> &mdash; conferma i punti di sicurezza chiusi con evidenza
+- [ ] **Legal / Privacy** &mdash; <nome>, <data> &mdash; conferma i punti su dati/regolazione, o "non applicabile" esplicito
+
 ## Quando richiedere un nuovo audit
 
 Solo dopo aver chiuso tutti i punti a priorit&agrave; Alta &mdash; "chiuso" vuol
-dire verificato (passo 4), non solo eseguito. I punti a priorit&agrave;
+dire verificato (passo 4), non solo eseguito. A T3, anche dopo la
+Garanzia dei chair qui sopra. I punti a priorit&agrave;
 Media/Bassa non bloccano una ri-verifica.
 ```
 
@@ -161,6 +176,8 @@ This is the tool `00_START_HERE.md`'s "Later — the audit" section points to wh
 The point of running any of this at all is to end up with **every** AI-built tool in the company classified and current — not a folder of one-off audit documents nobody aggregates. Section 2, point 11's Hub registration is what turns individual audits into that company-wide picture; a real audit run that skips it hasn't finished, whatever the report says.
 
 Section 9 and Section 10, below, give you a way in and out again for one narrow question about a tool already in the system — starting a full audit from scratch isn't the only door.
+
+This file's own checklist stops at conformity by design (Section 3) — `AI_TECHNICAL_DEPTH_REVIEW.md` is the companion pass that actually reads the code, scaled by tier from T1 up, and Section 2 point 15 above is where it gets triggered.
 
 ## 9. Direct commands
 
